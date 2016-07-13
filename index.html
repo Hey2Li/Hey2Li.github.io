@@ -318,8 +318,8 @@
 <p>就可以在浏览器中输入<a href="http://localhost:4000" target="_blank" rel="external">localhost:4000</a>查看本地博客了。要注意的是，所有的hexo指令都必须在你所建立的目录下执行。</p>
 <h1 id="部署Hexo到GitHub上"><a href="#部署Hexo到GitHub上" class="headerlink" title="部署Hexo到GitHub上"></a>部署Hexo到GitHub上</h1><p>本地的博客已经搭建好了，如何能让别人从网上访问到你的博客？只要将你的本地博客deploy到GitHub上就好。输入以下指令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
-<p>然后打开博客目录的_config.yml文件，设置deploy的type为git，repository(repo)<br>为 <figure class="highlight plain"><figcaption><span>（**需要在type和repo后面加上一个空格再填写，一定要注意加空格，我就是在这里没加空格导致后面命令一直失败**）。最后在你的Hexo目录中找到source文件夹，在其中新建一个文件CNAME，没有后缀名（建议使用Sublime Text新建），内容为你的域名（即ＸXXXXX．XXXXXX，不要加ＷＷＷ之类的前缀），保存。输入以下指令：</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
-<p>$ hexo g<br>$ hexo deploy//可简写为 hexo d<br>```</p>
+<p>然后打开博客目录的_config.yml文件，设置deploy的type为git，repository(repo)<br>为<em><a href="https://github.com/你的id/你的id.github.io.git" target="_blank" rel="external">https://github.com/你的id/你的id.github.io.git</a></em>（<strong>需要在type和repo后面加上一个空格再填写，一定要注意加空格，我就是在这里没加空格导致后面命令一直失败</strong>）。最后在你的Hexo目录中找到source文件夹，在其中新建一个文件CNAME，没有后缀名（建议使用Sublime Text新建），内容为你的域名（即ＸXXXXX．XXXXXX，不要加ＷＷＷ之类的前缀），保存。输入以下指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo deploy//可简写为 hexo d</div></pre></td></tr></table></figure>
 <p>在浏览器中输入你自己的域名就可以访问你自己的博客啦！</p>
 <h1 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h1><p>这里是我使用的一个主题，包括使用方法上面已经介绍的很详细了 <a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">NexT</a></p>
 <h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>建好的博客是可以绑定其他域名的，我这里并没有的做，有兴趣的朋友可以看我下面的参考文章上面有如何申请域名以及绑定域名。</p>
