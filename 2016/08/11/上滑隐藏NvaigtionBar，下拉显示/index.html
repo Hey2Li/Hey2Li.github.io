@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="旧" />
+  <meta name="keywords" content="iOS,navigation," />
 
 
 
@@ -84,19 +84,40 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="前言
+今天和产品沟通，要仿照一个APP，发现这个APP上滑时隐藏navigationBar,虽然也是隐藏但是效果和其他完全不一样，因为以前没见过也没做过，所以试着去实现一下，Google了一下，发现思路主要还是从KVO来下手。
+
+原APP的效果
+实现过程
+主要是给view中的滚动视图添加一个KVO来监视它的滑动，再根据它的offset来做一下操作，下面是代码
+
+1[myTableView addO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/07/12/hello-world/index.html">
+<meta property="og:title" content="上滑隐藏NvaigtionBar，下拉显示">
+<meta property="og:url" content="http://yoursite.com/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/index.html">
 <meta property="og:site_name" content="旧">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-07-12T06:47:30.000Z">
+<meta property="og:description" content="前言
+今天和产品沟通，要仿照一个APP，发现这个APP上滑时隐藏navigationBar,虽然也是隐藏但是效果和其他完全不一样，因为以前没见过也没做过，所以试着去实现一下，Google了一下，发现思路主要还是从KVO来下手。
+
+原APP的效果
+实现过程
+主要是给view中的滚动视图添加一个KVO来监视它的滑动，再根据它的offset来做一下操作，下面是代码
+
+1[myTableView addO">
+<meta property="og:image" content="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2016_23_42.gif">
+<meta property="og:image" content="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2015_55_00.gif">
+<meta property="og:updated_time" content="2016-08-11T08:59:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="上滑隐藏NvaigtionBar，下拉显示">
+<meta name="twitter:description" content="前言
+今天和产品沟通，要仿照一个APP，发现这个APP上滑时隐藏navigationBar,虽然也是隐藏但是效果和其他完全不一样，因为以前没见过也没做过，所以试着去实现一下，Google了一下，发现思路主要还是从KVO来下手。
+
+原APP的效果
+实现过程
+主要是给view中的滚动视图添加一个KVO来监视它的滑动，再根据它的offset来做一下操作，下面是代码
+
+1[myTableView addO">
+<meta name="twitter:image" content="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2016_23_42.gif">
 
 
 
@@ -117,9 +138,9 @@ Quick">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/12/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/"/>
 
-  <title> Hello World | 旧 </title>
+  <title> 上滑隐藏NvaigtionBar，下拉显示 | 旧 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +270,7 @@ Quick">
             
             
               
-                Hello World
+                上滑隐藏NvaigtionBar，下拉显示
               
             
           </h1>
@@ -261,19 +282,38 @@ Quick">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-12T14:47:30+08:00" content="2016-07-12">
-              2016-07-12
+            <time itemprop="dateCreated" datetime="2016-08-11T16:43:07+08:00" content="2016-08-11">
+              2016-08-11
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/12/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/12/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/11/上滑隐藏NvaigtionBar，下拉显示/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -296,15 +336,25 @@ Quick">
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>今天和产品沟通，要仿照一个APP，发现这个APP上滑时隐藏navigationBar,虽然也是隐藏但是效果和其他完全不一样，因为以前没见过也没做过，所以试着去实现一下，Google了一下，发现思路主要还是从KVO来下手。</p>
+</blockquote>
+<h2 id="原APP的效果"><a href="#原APP的效果" class="headerlink" title="原APP的效果"></a>原APP的效果</h2><p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2016_23_42.gif" alt="2016-08-11 16_23_42.gif"></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><ul>
+<li>主要是给view中的滚动视图添加一个KVO来监视它的滑动，再根据它的offset来做一下操作，下面是代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[myTableView addObserver:self forKeyPath:@&quot;contentOffset&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</div></pre></td></tr></table></figure>
+<ul>
+<li>获取tableView的 <code>contentOffset</code> 之后再根据具体需求来实现逻辑判断</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSString *,id&gt; *)change context:(void *)context &#123;</div><div class="line">    if ([object isEqual:myTableView] &amp;&amp; [keyPath isEqualToString:@&quot;contentOffset&quot;]) &#123;</div><div class="line">        //获取新值旧值</div><div class="line">        CGFloat newY = [change[@&quot;new&quot;] CGPointValue].y;</div><div class="line">        CGFloat oldY = [change[@&quot;old&quot;] CGPointValue].y;</div><div class="line">        float i = newY - oldY;//下拉是新值小于旧值的，所以i&lt;0 是下拉 i&gt;0 是上滑</div><div class="line">         NSLog(@&quot;%f&quot;,myTableView.contentOffset.y);</div><div class="line">        if (myTableView.contentOffset.y &gt; -64 &amp;&amp; myTableView.contentOffset.y &lt;= 24) &#123;//边界条件，此处不精确</div><div class="line">            if (i &lt;= 0 &amp;&amp; _isHide == NO &amp;&amp; self.navigationController.navigationBar.frame.origin.y == 20)&#123;</div><div class="line">                //下拉＋bar 已经显示的状态，不再移动</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line">            _isHide = NO;</div><div class="line">            //设置navigationbar 的frame 使他根据tableView来滑动</div><div class="line">            self.navigationController.navigationBar.frame = CGRectMake(0, -44 - myTableView.contentOffset.y, self.view.bounds.size.width, 44);</div><div class="line">            //控制透明度</div><div class="line">            self.navigationController.navigationBar.alpha = -myTableView.contentOffset.y/64;</div><div class="line">        &#125;else if (myTableView.contentOffset.y &gt; 24) &#123;</div><div class="line">            if (i &gt; 10) &#123;//更改数值大小可以控制触发 navigation bar 的滑动速度</div><div class="line">                _isHide = YES;</div><div class="line">            &#125;else if(i &lt; -10) &#123;</div><div class="line">                _isHide = NO;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        [self.navigationController setNavigationBarHidden:_isHide animated:YES];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="完成效果图"><a href="#完成效果图" class="headerlink" title="完成效果图"></a>完成效果图</h2><p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2015_55_00.gif" alt="2016-08-11 15_55_00.gif"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>实现起来确实没有什么难度，主要是因为以前没有做过，写这个主要是给大家看一下我的实现过程与思路，希望可以帮到大家。</p>
+</li>
+<li><p>我把源码上传到<a href="https://github.com/Hey2Li/HideNavi.git" target="_blank" rel="external">GitHub</a>了，需要的可以看一下。</p>
+</li>
+</ul>
 
       
     </div>
@@ -325,18 +375,26 @@ Quick">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/navigation/" rel="tag">#navigation</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/07/18/HTTP-in-iOS/" rel="next" title="HTTP in iOS">
+                <i class="fa fa-chevron-left"></i> HTTP in iOS
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/13/Mac下使用Hexo和GitHub搭建静态博客/" rel="prev" title="Mac下使用Hexo和GitHub搭建静态博客">
-                Mac下使用Hexo和GitHub搭建静态博客 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -362,8 +420,8 @@ Quick">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/12/hello-world/"
-           data-title="Hello World" data-url="http://yoursite.com/2016/07/12/hello-world/">
+      <div class="ds-thread" data-thread-key="2016/08/11/上滑隐藏NvaigtionBar，下拉显示/"
+           data-title="上滑隐藏NvaigtionBar，下拉显示" data-url="http://yoursite.com/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/">
       </div>
     
   </div>
@@ -474,7 +532,7 @@ Quick">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原APP的效果"><span class="nav-number">1.1.</span> <span class="nav-text">原APP的效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">1.2.</span> <span class="nav-text">实现过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完成效果图"><span class="nav-number">1.3.</span> <span class="nav-text">完成效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
