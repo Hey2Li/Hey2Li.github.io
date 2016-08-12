@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,navigation," />
+  <meta name="keywords" content="iOS,启动图," />
 
 
 
@@ -85,39 +85,47 @@
 
 
 <meta name="description" content="前言
-今天和产品沟通，要仿照一个APP，发现这个APP上滑时隐藏navigationBar,虽然也是隐藏但是效果和其他完全不一样，因为以前没见过也没做过，所以试着去实现一下，Google了一下，发现思路主要还是从KVO来下手。
+因为产品需求以及后台都未完成，所以最近在公司也没什么工作要做，主要也就看看技术文章，写写东西。今天的这个东西是一个关于启动页或者引导页的视频动画效果的实现过程，原型也是我们产品给我看的一个APP。
 
-原APP的效果
-实现过程
-主要是给view中的滚动视图添加一个KVO来监视它的滑动，再根据它的offset来做一下操作，下面是代码
+代码实现
+废话不多说，先上效果图
 
-1[myTableView addO">
+
+
+接下来说下思路了
+
+说实话刚开始我有点彷徨的，因为我以前并没有做过，接下来我把那个APP的里的资源给拿到了，发现一个.mp4的视频，我就记起我以前看过的一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="上滑隐藏NvaigtionBar，下拉显示">
-<meta property="og:url" content="http://yoursite.com/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/index.html">
+<meta property="og:title" content="iOS启动图实现视频动画">
+<meta property="og:url" content="http://yoursite.com/2016/08/12/iOS启动图实现视频动画/index.html">
 <meta property="og:site_name" content="旧">
 <meta property="og:description" content="前言
-今天和产品沟通，要仿照一个APP，发现这个APP上滑时隐藏navigationBar,虽然也是隐藏但是效果和其他完全不一样，因为以前没见过也没做过，所以试着去实现一下，Google了一下，发现思路主要还是从KVO来下手。
+因为产品需求以及后台都未完成，所以最近在公司也没什么工作要做，主要也就看看技术文章，写写东西。今天的这个东西是一个关于启动页或者引导页的视频动画效果的实现过程，原型也是我们产品给我看的一个APP。
 
-原APP的效果
-实现过程
-主要是给view中的滚动视图添加一个KVO来监视它的滑动，再根据它的offset来做一下操作，下面是代码
+代码实现
+废话不多说，先上效果图
 
-1[myTableView addO">
-<meta property="og:image" content="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2016_23_42.gif">
-<meta property="og:image" content="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2015_55_00.gif">
-<meta property="og:updated_time" content="2016-08-12T07:42:33.000Z">
+
+
+接下来说下思路了
+
+说实话刚开始我有点彷徨的，因为我以前并没有做过，接下来我把那个APP的里的资源给拿到了，发现一个.mp4的视频，我就记起我以前看过的一">
+<meta property="og:image" content="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-12%2014_15_23.gif">
+<meta property="og:updated_time" content="2016-08-12T07:44:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="上滑隐藏NvaigtionBar，下拉显示">
+<meta name="twitter:title" content="iOS启动图实现视频动画">
 <meta name="twitter:description" content="前言
-今天和产品沟通，要仿照一个APP，发现这个APP上滑时隐藏navigationBar,虽然也是隐藏但是效果和其他完全不一样，因为以前没见过也没做过，所以试着去实现一下，Google了一下，发现思路主要还是从KVO来下手。
+因为产品需求以及后台都未完成，所以最近在公司也没什么工作要做，主要也就看看技术文章，写写东西。今天的这个东西是一个关于启动页或者引导页的视频动画效果的实现过程，原型也是我们产品给我看的一个APP。
 
-原APP的效果
-实现过程
-主要是给view中的滚动视图添加一个KVO来监视它的滑动，再根据它的offset来做一下操作，下面是代码
+代码实现
+废话不多说，先上效果图
 
-1[myTableView addO">
-<meta name="twitter:image" content="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2016_23_42.gif">
+
+
+接下来说下思路了
+
+说实话刚开始我有点彷徨的，因为我以前并没有做过，接下来我把那个APP的里的资源给拿到了，发现一个.mp4的视频，我就记起我以前看过的一">
+<meta name="twitter:image" content="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-12%2014_15_23.gif">
 
 
 
@@ -138,9 +146,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/12/iOS启动图实现视频动画/"/>
 
-  <title> 上滑隐藏NvaigtionBar，下拉显示 | 旧 </title>
+  <title> iOS启动图实现视频动画 | 旧 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -270,7 +278,7 @@
             
             
               
-                上滑隐藏NvaigtionBar，下拉显示
+                iOS启动图实现视频动画
               
             
           </h1>
@@ -282,8 +290,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-11T16:43:07+08:00" content="2016-08-11">
-              2016-08-11
+            <time itemprop="dateCreated" datetime="2016-08-12T15:31:37+08:00" content="2016-08-12">
+              2016-08-12
             </time>
           </span>
 
@@ -312,8 +320,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/11/上滑隐藏NvaigtionBar，下拉显示/" itemprop="commentsCount"></span>
+                <a href="/2016/08/12/iOS启动图实现视频动画/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/12/iOS启动图实现视频动画/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -336,25 +344,29 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>今天和产品沟通，要仿照一个APP，发现这个APP上滑时隐藏navigationBar,虽然也是隐藏但是效果和其他完全不一样，因为以前没见过也没做过，所以试着去实现一下，Google了一下，发现思路主要还是从KVO来下手。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>因为产品需求以及后台都未完成，所以最近在公司也没什么工作要做，主要也就看看技术文章，写写东西。今天的这个东西是一个关于启动页或者引导页的视频动画效果的实现过程，原型也是我们产品给我看的一个APP。</p>
 </blockquote>
-<h2 id="原APP的效果"><a href="#原APP的效果" class="headerlink" title="原APP的效果"></a>原APP的效果</h2><p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2016_23_42.gif" alt="2016-08-11 16_23_42.gif"></p>
-<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><ul>
-<li>主要是给view中的滚动视图添加一个KVO来监视它的滑动，再根据它的offset来做一下操作，下面是代码</li>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><ul>
+<li>废话不多说，先上效果图</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[myTableView addObserver:self forKeyPath:@&quot;contentOffset&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</div></pre></td></tr></table></figure>
+<p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-12%2014_15_23.gif" alt="完成效果图.gif"></p>
 <ul>
-<li>获取tableView的 <code>contentOffset</code> 之后再根据具体需求来实现逻辑判断</li>
+<li>接下来说下思路了</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSString *,id&gt; *)change context:(void *)context &#123;</div><div class="line">    if ([object isEqual:myTableView] &amp;&amp; [keyPath isEqualToString:@&quot;contentOffset&quot;]) &#123;</div><div class="line">        //获取新值旧值</div><div class="line">        CGFloat newY = [change[@&quot;new&quot;] CGPointValue].y;</div><div class="line">        CGFloat oldY = [change[@&quot;old&quot;] CGPointValue].y;</div><div class="line">        float i = newY - oldY;//下拉是新值小于旧值的，所以i&lt;0 是下拉 i&gt;0 是上滑</div><div class="line">         NSLog(@&quot;%f&quot;,myTableView.contentOffset.y);</div><div class="line">        if (myTableView.contentOffset.y &gt; -64 &amp;&amp; myTableView.contentOffset.y &lt;= 24) &#123;//边界条件，此处不精确</div><div class="line">            if (i &lt;= 0 &amp;&amp; _isHide == NO &amp;&amp; self.navigationController.navigationBar.frame.origin.y == 20)&#123;</div><div class="line">                //下拉＋bar 已经显示的状态，不再移动</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line">            _isHide = NO;</div><div class="line">            //设置navigationbar 的frame 使他根据tableView来滑动</div><div class="line">            self.navigationController.navigationBar.frame = CGRectMake(0, -44 - myTableView.contentOffset.y, self.view.bounds.size.width, 44);</div><div class="line">            //控制透明度</div><div class="line">            self.navigationController.navigationBar.alpha = -myTableView.contentOffset.y/64;</div><div class="line">        &#125;else if (myTableView.contentOffset.y &gt; 24) &#123;</div><div class="line">            if (i &gt; 10) &#123;//更改数值大小可以控制触发 navigation bar 的滑动速度</div><div class="line">                _isHide = YES;</div><div class="line">            &#125;else if(i &lt; -10) &#123;</div><div class="line">                _isHide = NO;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        [self.navigationController setNavigationBarHidden:_isHide animated:YES];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="完成效果图"><a href="#完成效果图" class="headerlink" title="完成效果图"></a>完成效果图</h2><p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2015_55_00.gif" alt="2016-08-11 15_55_00.gif"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>实现起来确实没有什么难度，主要是因为以前没有做过，写这个主要是给大家看一下我的实现过程与思路，希望可以帮到大家。</p>
-</li>
-<li><p>我把源码上传到<a href="https://github.com/Hey2Li/HideNavi.git" target="_blank" rel="external">GitHub</a>了，需要的可以看一下。</p>
-</li>
-</ul>
+<p>说实话刚开始我有点彷徨的，因为我以前并没有做过，接下来我把那个APP的里的资源给拿到了，发现一个.mp4的视频，我就记起我以前看过的一篇文章<a href="http://www.jianshu.com/p/2b03d19f4acd" target="_blank" rel="external">iOS&lt;咸鱼APP&gt;新特性界面-视频动画</a>，真是惭愧，借鉴了一下，然后就有了我的这篇文章。</p>
+<p>主要思路就是用一个控制器来作为播放视频的载体，然后在让这个控制器作为根视图，视频播放完成之后那就该干嘛干嘛了。<br>感觉废话说的有点多啊，下面就放代码好了</p>
+<p>先新建一个控制器<code>AnimationViewController</code>在控制器中新建一个属性<code>moviePlayer</code>，记得要先引入系统库<code>&lt;MediaPlayer/MediaPlayer.h&gt;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;</div></pre></td></tr></table></figure>
+<p>设置<code>moviePlayer</code>我是在懒加载中直接设置的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">-(MPMoviePlayerController *)moviePlayer&#123;</div><div class="line">    if (!_moviePlayer) &#123;</div><div class="line">        _moviePlayer = [[MPMoviePlayerController alloc]init];</div><div class="line">        [_moviePlayer.view setFrame:self.view.bounds];</div><div class="line">        //设置自动播放</div><div class="line">        [_moviePlayer setShouldAutoplay:NO];</div><div class="line">        //设置源类型 因为新特性一般都是播放本地的小视频 所以设置源类型为file</div><div class="line">        _moviePlayer.movieSourceType = MPMovieSourceTypeFile;</div><div class="line">        //取消控制视图 如：播放暂停等</div><div class="line">        _moviePlayer.controlStyle = MPMovieControlStyleNone;</div><div class="line">        [self.view addSubview:_moviePlayer.view];</div><div class="line">        //监听播放完成</div><div class="line">        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(playFinsihed) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];</div><div class="line">    &#125;</div><div class="line">    return _moviePlayer;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在<code>.h</code>中公开一个<code>moviePath</code>视频的路径，已经一个结束播放的block<code>playFinished</code>等下需要。</p>
+<p><code>AnimationViewController</code>中也算差不多了，毕竟也没什么东西，接下来我们去<code>AppDelegate</code>中声明一个<code>AnimationViewController</code>属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (AnimationViewController *)animationViewController&#123;</div><div class="line">    if (!_animationViewController) &#123;</div><div class="line">        _animationViewController = [[AnimationViewController alloc]init];</div><div class="line">       //设置本地视频路径</div><div class="line">        _animationViewController.moviePath = [[NSBundle mainBundle] pathForResource:@&quot;V&quot; ofType:@&quot;mp4&quot;];</div><div class="line">        _animationViewController.playFinished = ^&#123;</div><div class="line">            UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];</div><div class="line">            [UIApplication sharedApplication].keyWindow.rootViewController = rootNav;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    return _animationViewController;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在<code>AppDelegate</code>的启动方法把这个控制器设为根视图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];</div><div class="line">    self.window.rootViewController = self.animationViewController;</div><div class="line">    [self.window makeKeyAndVisible];</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>基本算是完成了,惯例放上我的<a href="https://github.com/Hey2Li/LaunchAnimationDemo" target="_blank" rel="external">源码</a>，有需要的可以去看一下，最后希望可以帮到大家。</p>
+<p><em>这里要说一句，刚开始我用这个路径但是一直为空，后来我添加了一个名字为<code>Resource</code>的文件夹把mp4放进去就好了，也不知道为什么。有知道也可以告诉我</em></p>
 
       
     </div>
@@ -379,7 +391,7 @@
           
             <a href="/tags/iOS/" rel="tag">#iOS</a>
           
-            <a href="/tags/navigation/" rel="tag">#navigation</a>
+            <a href="/tags/启动图/" rel="tag">#启动图</a>
           
         </div>
       
@@ -388,17 +400,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/18/HTTP-in-iOS/" rel="next" title="HTTP in iOS">
-                <i class="fa fa-chevron-left"></i> HTTP in iOS
+              <a href="/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/" rel="next" title="上滑隐藏NvaigtionBar，下拉显示">
+                <i class="fa fa-chevron-left"></i> 上滑隐藏NvaigtionBar，下拉显示
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/12/iOS启动图实现视频动画/" rel="prev" title="iOS启动图实现视频动画">
-                iOS启动图实现视频动画 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -424,8 +432,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/11/上滑隐藏NvaigtionBar，下拉显示/"
-           data-title="上滑隐藏NvaigtionBar，下拉显示" data-url="http://yoursite.com/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/">
+      <div class="ds-thread" data-thread-key="2016/08/12/iOS启动图实现视频动画/"
+           data-title="iOS启动图实现视频动画" data-url="http://yoursite.com/2016/08/12/iOS启动图实现视频动画/">
       </div>
     
   </div>
@@ -536,7 +544,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原APP的效果"><span class="nav-number">1.1.</span> <span class="nav-text">原APP的效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">1.2.</span> <span class="nav-text">实现过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完成效果图"><span class="nav-number">1.3.</span> <span class="nav-text">完成效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
           </div>
         </section>
