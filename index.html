@@ -115,7 +115,7 @@
 
   <link rel="canonical" href="http://yoursite.com/"/>
 
-  <title> 归档 | 旧 </title>
+  <title> 旧 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,7 +136,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -223,252 +225,934 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+  <section id="posts" class="posts-expand">
+    
+      
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  
+  
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 6 篇日志。 继续努力。
-    </span>
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/30/iOS开发实现TouchID指纹解锁/" itemprop="url">
+                  iOS开发实现TouchID指纹解锁
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-30T09:36:57+08:00" content="2016-08-30">
+              2016-08-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/30/iOS开发实现TouchID指纹解锁/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/iOS开发实现TouchID指纹解锁/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/08/30/iOS开发实现TouchID指纹解锁/" itemprop="url">
-              
-                <span itemprop="name">iOS开发实现TouchID指纹解锁</span>
-              
-            </a>
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>一直想实现一下指纹解锁，苦于一直没时间，最近终于闲了下来所以翻了翻文档看了看demo，完成了这篇教程。本功能实现起来是很简单的，因为苹果都已经帮我们封装好了，只需要实现几个方法就可以了。</p>
+</blockquote>
+<p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/1.pic.jpg" alt="实现效果图"></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h5 id="1-首先引入指纹解锁必须的头文件"><a href="#1-首先引入指纹解锁必须的头文件" class="headerlink" title="1.首先引入指纹解锁必须的头文件"></a>1.首先引入指纹解锁必须的头文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;LocalAuthentication/LocalAuthentication.h&gt;</div></pre></td></tr></table></figure>
+<h5 id="2-了解下主要的两个方法"><a href="#2-了解下主要的两个方法" class="headerlink" title="2.了解下主要的两个方法"></a>2.了解下主要的两个方法</h5><p>这个方法是判断设备是否支持TouchID的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (BOOL)canEvaluatePolicy:(LAPolicy)policy error:(NSError * __autoreleasing *)error __attribute__((swift_error(none)));</div></pre></td></tr></table></figure>
+<p>这个是用来验证TouchID的，会有弹出框出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)evaluatePolicy:(LAPolicy)policy</div><div class="line">       localizedReason:(NSString *)localizedReason</div><div class="line">                 reply:(void(^)(BOOL success, NSError * __nullable error))reply;</div></pre></td></tr></table></figure>
+<h5 id="3-新建LAContext对象"><a href="#3-新建LAContext对象" class="headerlink" title="3.新建LAContext对象"></a>3.新建<code>LAContext</code>对象</h5><h6 id="主要的属性设置"><a href="#主要的属性设置" class="headerlink" title="主要的属性设置"></a>主要的属性设置</h6><ul>
+<li><code>localizedFallbackTitle</code>：用于设置左边的按钮的名称，默认是<code>Enter Password</code>.</li>
+</ul>
+<ul>
+<li><p><code>localizedReason</code>：用于设置提示语，表示为什么要使用<code>Touch ID</code><br><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2.pic.jpg" alt="解锁失败界面"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//创建LAContext</div><div class="line">LAContext *context = [LAContext new];</div><div class="line"></div><div class="line">//这个属性是设置指纹输入失败之后的弹出框的选项</div><div class="line">context.localizedFallbackTitle = @&quot;没有忘记密码&quot;;</div></pre></td></tr></table></figure>
+<h5 id="4-主要回调方法，包括成功以及失败的"><a href="#4-主要回调方法，包括成功以及失败的" class="headerlink" title="4.主要回调方法，包括成功以及失败的"></a>4.主要回调方法，包括成功以及失败的</h5></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">NSError *error = nil;</div><div class="line">    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&amp;error]) &#123;</div><div class="line">        NSLog(@&quot;支持指纹识别&quot;);</div><div class="line">        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@&quot;指纹解锁&quot; reply:^(BOOL success, NSError * _Nullable error) &#123;</div><div class="line">            if (success) &#123;</div><div class="line">                NSLog(@&quot;验证成功 刷新主界面&quot;);</div><div class="line">            &#125;else&#123;</div><div class="line">                NSLog(@&quot;%@&quot;,error.localizedDescription);</div><div class="line">                switch (error.code) &#123;</div><div class="line">                    case LAErrorSystemCancel:</div><div class="line">                    &#123;</div><div class="line">                        NSLog(@&quot;系统取消授权，如其他APP切入&quot;);</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                    case LAErrorUserCancel:</div><div class="line">                    &#123;</div><div class="line">                        NSLog(@&quot;用户取消验证Touch ID&quot;);</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                    case LAErrorAuthenticationFailed:</div><div class="line">                    &#123;</div><div class="line">                        NSLog(@&quot;授权失败&quot;);</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                    case LAErrorPasscodeNotSet:</div><div class="line">                    &#123;</div><div class="line">                        NSLog(@&quot;系统未设置密码&quot;);</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                    case LAErrorTouchIDNotAvailable:</div><div class="line">                    &#123;</div><div class="line">                        NSLog(@&quot;设备Touch ID不可用，例如未打开&quot;);</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                    case LAErrorTouchIDNotEnrolled:</div><div class="line">                    &#123;</div><div class="line">                        NSLog(@&quot;设备Touch ID不可用，用户未录入&quot;);</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                    case LAErrorUserFallback:</div><div class="line">                    &#123;</div><div class="line">                        [[NSOperationQueue mainQueue] addOperationWithBlock:^&#123;</div><div class="line">                            NSLog(@&quot;用户选择输入密码，切换主线程处理&quot;);</div><div class="line">                        &#125;];</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                    default:</div><div class="line">                    &#123;</div><div class="line">                        [[NSOperationQueue mainQueue] addOperationWithBlock:^&#123;</div><div class="line">                            NSLog(@&quot;其他情况，切换主线程处理&quot;);</div><div class="line">                        &#125;];</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;];</div><div class="line">    &#125;else&#123;</div><div class="line">        NSLog(@&quot;不支持指纹识别&quot;);</div><div class="line">        switch (error.code) &#123;</div><div class="line">            case LAErrorTouchIDNotEnrolled:</div><div class="line">            &#123;</div><div class="line">                NSLog(@&quot;TouchID is not enrolled&quot;);</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case LAErrorPasscodeNotSet:</div><div class="line">            &#123;</div><div class="line">                NSLog(@&quot;A passcode has not been set&quot;);</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            default:</div><div class="line">            &#123;</div><div class="line">                NSLog(@&quot;TouchID not available&quot;);</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125; </div><div class="line">        NSLog(@&quot;%@&quot;,error.localizedDescription);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>做到这里几乎就算完成，使用确实很简单，因为苹果都已经给我们做好一切，对我们开发者来说就很轻松了。教程写的很简陋，希望大家多多包涵，代码我已经传到<a href="https://github.com/Hey2Li/TouchID.git" target="_blank" rel="external">GitHub</a>了，还有我的<a href="http://hiis.me" target="_blank" rel="external">个人博客</a>。<br>最后希望可以帮到大家。</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a href="http://www.jianshu.com/p/8ba83ec5688a/comments/2564595" target="_blank" rel="external">iOS指纹解锁</a></p>
+
+          
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-30T09:36:57+08:00"
-              content="2016-08-30" >
-          08-30
-        </time>
-      </div>
+    <div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/08/12/iOS启动图实现视频动画/" itemprop="url">
-              
-                <span itemprop="name">iOS启动图实现视频动画</span>
-              
-            </a>
         
-      </h1>
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/12/iOS启动图实现视频动画/" itemprop="url">
+                  iOS启动图实现视频动画
+                </a>
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-12T15:31:37+08:00"
-              content="2016-08-12" >
-          08-12
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-12T15:31:37+08:00" content="2016-08-12">
+              2016-08-12
+            </time>
+          </span>
 
-    </header>
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/12/iOS启动图实现视频动画/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/12/iOS启动图实现视频动画/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>因为产品需求以及后台都未完成，所以最近在公司也没什么工作要做，主要也就看看技术文章，写写东西。今天的这个东西是一个关于启动页或者引导页的视频动画效果的实现过程，原型也是我们产品给我看的一个APP。</p>
+</blockquote>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><ul>
+<li>废话不多说，先上效果图</li>
+</ul>
+<p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-12%2014_15_23.gif" alt="完成效果图.gif"></p>
+<ul>
+<li>接下来说下思路了</li>
+</ul>
+<p>说实话刚开始我有点彷徨的，因为我以前并没有做过，接下来我把那个APP的里的资源给拿到了，发现一个.mp4的视频，我就记起我以前看过的一篇文章<a href="http://www.jianshu.com/p/2b03d19f4acd" target="_blank" rel="external">iOS&lt;咸鱼APP&gt;新特性界面-视频动画</a>，真是惭愧，借鉴了一下，然后就有了我的这篇文章。</p>
+<p>主要思路就是用一个控制器来作为播放视频的载体，然后在让这个控制器作为根视图，视频播放完成之后那就该干嘛干嘛了。<br>感觉废话说的有点多啊，下面就放代码好了</p>
+<p>先新建一个控制器<code>AnimationViewController</code>在控制器中新建一个属性<code>moviePlayer</code>，记得要先引入系统库<code>&lt;MediaPlayer/MediaPlayer.h&gt;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;</div></pre></td></tr></table></figure>
+<p>设置<code>moviePlayer</code>我是在懒加载中直接设置的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">-(MPMoviePlayerController *)moviePlayer&#123;</div><div class="line">    if (!_moviePlayer) &#123;</div><div class="line">        _moviePlayer = [[MPMoviePlayerController alloc]init];</div><div class="line">        [_moviePlayer.view setFrame:self.view.bounds];</div><div class="line">        //设置自动播放</div><div class="line">        [_moviePlayer setShouldAutoplay:NO];</div><div class="line">        //设置源类型 因为新特性一般都是播放本地的小视频 所以设置源类型为file</div><div class="line">        _moviePlayer.movieSourceType = MPMovieSourceTypeFile;</div><div class="line">        //取消控制视图 如：播放暂停等</div><div class="line">        _moviePlayer.controlStyle = MPMovieControlStyleNone;</div><div class="line">        [self.view addSubview:_moviePlayer.view];</div><div class="line">        //监听播放完成</div><div class="line">        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(playFinsihed) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];</div><div class="line">    &#125;</div><div class="line">    return _moviePlayer;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在<code>.h</code>中公开一个<code>moviePath</code>视频的路径，已经一个结束播放的block<code>playFinished</code>等下需要。</p>
+<p><code>AnimationViewController</code>中也算差不多了，毕竟也没什么东西，接下来我们去<code>AppDelegate</code>中声明一个<code>AnimationViewController</code>属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (AnimationViewController *)animationViewController&#123;</div><div class="line">    if (!_animationViewController) &#123;</div><div class="line">        _animationViewController = [[AnimationViewController alloc]init];</div><div class="line">       //设置本地视频路径</div><div class="line">        _animationViewController.moviePath = [[NSBundle mainBundle] pathForResource:@&quot;V&quot; ofType:@&quot;mp4&quot;];</div><div class="line">        _animationViewController.playFinished = ^&#123;</div><div class="line">            UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];</div><div class="line">            [UIApplication sharedApplication].keyWindow.rootViewController = rootNav;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    return _animationViewController;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在<code>AppDelegate</code>的启动方法把这个控制器设为根视图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];</div><div class="line">    self.window.rootViewController = self.animationViewController;</div><div class="line">    [self.window makeKeyAndVisible];</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>基本算是完成了,惯例放上我的<a href="https://github.com/Hey2Li/LaunchAnimationDemo" target="_blank" rel="external">源码</a>，有需要的可以去看一下，最后希望可以帮到大家。</p>
+<p><em>这里要说一句，刚开始我用这个路径但是一直为空，后来我添加了一个名字为<code>Resource</code>的文件夹把mp4放进去就好了，也不知道为什么。有知道也可以告诉我</em></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/" itemprop="url">
-              
-                <span itemprop="name">上滑隐藏NvaigtionBar，下拉显示</span>
-              
-            </a>
         
-      </h1>
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/" itemprop="url">
+                  上滑隐藏NvaigtionBar，下拉显示
+                </a>
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-11T16:43:07+08:00"
-              content="2016-08-11" >
-          08-11
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-11T16:43:07+08:00" content="2016-08-11">
+              2016-08-11
+            </time>
+          </span>
 
-    </header>
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/11/上滑隐藏NvaigtionBar，下拉显示/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/11/上滑隐藏NvaigtionBar，下拉显示/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>今天和产品沟通，要仿照一个APP，发现这个APP上滑时隐藏navigationBar,虽然也是隐藏但是效果和其他完全不一样，因为以前没见过也没做过，所以试着去实现一下，Google了一下，发现思路主要还是从KVO来下手。</p>
+</blockquote>
+<h2 id="原APP的效果"><a href="#原APP的效果" class="headerlink" title="原APP的效果"></a>原APP的效果</h2><p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2016_23_42.gif" alt="2016-08-11 16_23_42.gif"></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><ul>
+<li>主要是给view中的滚动视图添加一个KVO来监视它的滑动，再根据它的offset来做一下操作，下面是代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[myTableView addObserver:self forKeyPath:@&quot;contentOffset&quot; options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];</div></pre></td></tr></table></figure>
+<ul>
+<li>获取tableView的 <code>contentOffset</code> 之后再根据具体需求来实现逻辑判断</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSString *,id&gt; *)change context:(void *)context &#123;</div><div class="line">    if ([object isEqual:myTableView] &amp;&amp; [keyPath isEqualToString:@&quot;contentOffset&quot;]) &#123;</div><div class="line">        //获取新值旧值</div><div class="line">        CGFloat newY = [change[@&quot;new&quot;] CGPointValue].y;</div><div class="line">        CGFloat oldY = [change[@&quot;old&quot;] CGPointValue].y;</div><div class="line">        float i = newY - oldY;//下拉是新值小于旧值的，所以i&lt;0 是下拉 i&gt;0 是上滑</div><div class="line">         NSLog(@&quot;%f&quot;,myTableView.contentOffset.y);</div><div class="line">        if (myTableView.contentOffset.y &gt; -64 &amp;&amp; myTableView.contentOffset.y &lt;= 24) &#123;//边界条件，此处不精确</div><div class="line">            if (i &lt;= 0 &amp;&amp; _isHide == NO &amp;&amp; self.navigationController.navigationBar.frame.origin.y == 20)&#123;</div><div class="line">                //下拉＋bar 已经显示的状态，不再移动</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line">            _isHide = NO;</div><div class="line">            //设置navigationbar 的frame 使他根据tableView来滑动</div><div class="line">            self.navigationController.navigationBar.frame = CGRectMake(0, -44 - myTableView.contentOffset.y, self.view.bounds.size.width, 44);</div><div class="line">            //控制透明度</div><div class="line">            self.navigationController.navigationBar.alpha = -myTableView.contentOffset.y/64;</div><div class="line">        &#125;else if (myTableView.contentOffset.y &gt; 24) &#123;</div><div class="line">            if (i &gt; 10) &#123;//更改数值大小可以控制触发 navigation bar 的滑动速度</div><div class="line">                _isHide = YES;</div><div class="line">            &#125;else if(i &lt; -10) &#123;</div><div class="line">                _isHide = NO;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        [self.navigationController setNavigationBarHidden:_isHide animated:YES];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="完成效果图"><a href="#完成效果图" class="headerlink" title="完成效果图"></a>完成效果图</h2><p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2016-08-11%2015_55_00.gif" alt="2016-08-11 15_55_00.gif"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>实现起来确实没有什么难度，主要是因为以前没有做过，写这个主要是给大家看一下我的实现过程与思路，希望可以帮到大家。</p>
+</li>
+<li><p>我把源码上传到<a href="https://github.com/Hey2Li/HideNavi.git" target="_blank" rel="external">GitHub</a>了，需要的可以看一下。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/07/18/HTTP-in-iOS/" itemprop="url">
-              
-                <span itemprop="name">HTTP in iOS</span>
-              
-            </a>
         
-      </h1>
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/18/HTTP-in-iOS/" itemprop="url">
+                  HTTP in iOS
+                </a>
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-18T11:18:53+08:00"
-              content="2016-07-18" >
-          07-18
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-18T11:18:53+08:00" content="2016-07-18">
+              2016-07-18
+            </time>
+          </span>
 
-    </header>
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/18/HTTP-in-iOS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/18/HTTP-in-iOS/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>HTTP属于老话题了，在项目中我们经常需要往服务端发POST或者GET请求，但是对于HTTP的了解不应只局限于此。千里之行，始于足下。越想走的远，基本原理就应该了解的透彻全面一些，仅仅停留在使用ASIHttpRequest或者AFNetWorking传个参数发个请求的程度上是不够的。这篇文章就是带你全方面回顾一下HTTP。<br>通过本文你能收获哪些内容：</p>
+</blockquote>
+<ul>
+<li>完整HTTP请求与响应包含的必要元素</li>
+<li>HTTP不同版本之间的差异</li>
+<li>HTTP、Socket、TCP的区别(易混)</li>
+</ul>
+<h2 id="一、HTTP协议"><a href="#一、HTTP协议" class="headerlink" title="一、HTTP协议"></a>一、HTTP协议</h2><p>HTTP本质上是一种协议，全称是Hypertext Transfer Protocol，即超文本传输协议。从名字上可以看出该协议用于规定客户端与服务端之间的传输规则，所传输的内容不局限于文本(其实可以传输任意类型的数据)。<br><img src="http://7xwhtl.com1.z0.glb.clouddn.com/1@2x.png" alt="图1.1传输示意图.png"></p>
+<h2 id="二、HTTP请求与响应的内容"><a href="#二、HTTP请求与响应的内容" class="headerlink" title="二、HTTP请求与响应的内容"></a>二、HTTP请求与响应的内容</h2><p>当我们往服务端发送一条HTTP请求时都发送了哪些东西过去呢？<br>先看一个POST请求的示例图：</p>
+<p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/2.png" alt="图2.1 HTTP_POST请求示例.png"></p>
+<blockquote>
+<p>注：本文使用Paw来模拟发送HTTP请求，使用Charles抓包，Charles选中”Request “以及”Raw”选项就可以看到请求的全部内容</p>
+</blockquote>
+<p>以上示例图中其实已经包含了一个HTTP请求所必备的几大要素：请求行、请求头(headerField)、请求体(body)；同理，响应也有状态行、响应头、实体内容。接下来我们逐个展开。</p>
+<h3 id="1、请求行"><a href="#1、请求行" class="headerlink" title="1、请求行"></a>1、请求行</h3><p>请求行包含请求方法(Method)、请求统一资源标识符(URI)、HTTP版本号，如图2.1第一行所示：</p>
+<p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/3.png" alt="图2.2 请求行.png"></p>
+<ul>
+<li>请求方法就是我们所熟悉的POST、GET、HEAD、PUT等</li>
+<li>URI就是URL中排除掉Host剩下的部分，也就是资源在服务器本地上的路径</li>
+<li>HTTP版本号，目前主流的版本是1.1(1999年开始采用)，最新的版本是2.0(2015年5月发布)。不同版本之间差异下面会再展开</li>
+</ul>
+<h3 id="2、请求头"><a href="#2、请求头" class="headerlink" title="2、请求头"></a>2、请求头</h3><p>请求头主要存放对客户端想给服务端的附加信息，下图框框的部分就是请求头：</p>
+<p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/4.png" alt="图2.3 请求头.png"></p>
+<p>HTTP请求在iOS中用<code>NSURLRequest</code>与<code>NSMutableRequest</code>表示；HTTP响应用<code>NSHTTPURLResponse</code>表示。</p>
+<ul>
+<li>Host: 目标服务器的网络地址</li>
+<li>Accept: 让服务端知道客户端所能接收的数据类型，如<code>text/html</code> <em>/</em></li>
+<li>Content-Type: body中的数据类型，如<code>application/json</code>; charset=UTF-8</li>
+<li>Accept-Language: 客户端的语言环境，如<code>zh-cn</code></li>
+<li>Accept-Encoding: 客户端支持的数据压缩格式，如gzip</li>
+<li>User-Agent: 客户端的软件环境，我们可以更改该字段为自己客户端的名字，比如QQ music v1.11，比如浏览器<code>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/600.8.9 (KHTML, like Gecko) Maxthon/4.5.2</code></li>
+<li>Connection: keep-alive，该字段是从HTTP 1.1才开始有的，用来告诉服务端这是一个持久连接，“请服务端不要在发出响应后立即断开TCP连接”。关于该字段的更多解释将在后面的HTTP版本简介中展开。</li>
+<li><p>Content-Length: body的长度，如果body为空则该字段值为0。该字段一般在POST请求中才会有。<br>POST请求的body请求体也有可能是空的，因此POST中<code>Content-Length</code>也有可能为0</p>
+</li>
+<li><p>Cookie: 记录者用户信息的保存在本地的用户数据，如果有会被自动附上<br>值得一提的是，在iOS中当你发送一个任意请求时，不管你愿不愿意，NSURLRequest都会自动帮你记录你所访问的URL上设置的cookie。在iOS中用NSHTTPCookieStorage表示，是一个单例。通过</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage]; </div><div class="line">for (NSHTTPCookie *cookie in [cookieJar cookies])&#123;</div><div class="line">	 NSLog(@&quot;%@&quot;, cookie); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以获取目前被自动保存的所有cookie。对cookie的操作感兴趣的请移步IOS中http请求使用cookie这篇文章。</p>
+<p>以上就是我们日常开发中比较经常遇到的请求头，其实还有其他的field，但篇幅所限无法一一列出，想了解所有请求头请看这里请求头响应头列表。那在iOS中如何设置添加这些field呢？可以使用<code>-[NSMutableURLRequest addValue: forHTTPHeaderField:]</code>方法，获取当前请求已经设置的<code>field</code>可以用<code>-[NSURLRequest allHTTPHeaderFields]</code>。也就是我们可以通过以上接口定制我们所需要的请求头，但是有些<code>field</code>是不能改的，我们看一下iOS的描述：</p>
+<p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/5.png" alt="图2.4 iOS请求头接口描述.png"></p>
+<p>从文档中我们可以看到，在iOS中不应当对<code>Authorization Connection Host WWW-Authenticate</code>这几个<code>header field</code>做更改。</p>
+<h3 id="3、请求体"><a href="#3、请求体" class="headerlink" title="3、请求体"></a>3、请求体</h3><p>真正需要发给服务端的数据，在使用<code>POST-multipart</code>上传请求中请求体就是上传文件的二进制<code>NSData</code>类型数据；在GET请求中请求体为空；在普通的POST请求中请求体就是一些表单数据。在iOS中一般用<code>NSURLRequest</code>与<code>NSMutableURLRequest</code>的<code>HTTPBody</code>属性表示，添加body用<code>-[NSMutableURLRequest setHTTPBody:]</code>。</p>
+<h3 id="4、响应状态行"><a href="#4、响应状态行" class="headerlink" title="4、响应状态行"></a>4、响应状态行</h3><p>状态行是服务端返回给客户端的状态信息，包含HTTP版本号、状态码、状态码对应的英文名称。<br>以下就是典型的正确状态行：<br>HTTP/1.1 200 OK<br>这个部分需要讲的是错误码。事实上HTTP请求错误码可以根据错误码从左往右第一个数字大致分为以下几类：</p>
+<ul>
+<li>1XX：信息提示。不代表成功或者失败，表示临时响应，比如100表示继续，101表示切换协议</li>
+<li>2XX: 成功</li>
+<li>3XX: 重定向</li>
+<li>4XX:客户端错误，很有可能是客户端发生问题，如亲切可爱的404表示未找到文件，说明你的URI是有问题的，服务器机子上该目录是没有该文件的；414URI太长</li>
+<li>5XX: 服务器错误，比如504网关超时</li>
+</ul>
+<p>错误码是不用去记的，出错了再查对应的错误码含义就行。但是知道上面的分类有助于第一时间做出大体的判断，起码你能清楚是服务端还是客户端的原因。</p>
+<h3 id="5、响应头与响应实体"><a href="#5、响应头与响应实体" class="headerlink" title="5、响应头与响应实体"></a>5、响应头与响应实体</h3><p>这部分与请求部分差异不大，响应头的字field会有稍许不同，响应头中的header field同样移步请求头响应头列表。</p>
+<h2 id="三、HTTP版本简介"><a href="#三、HTTP版本简介" class="headerlink" title="三、HTTP版本简介"></a>三、HTTP版本简介</h2><p>这里我把HTTP版本简单分为三类：1.1之前，1.1，2.0，针对这三类做个主要差异的介绍：</p>
+<blockquote>
+<p>HTTP 1.1之前</p>
+</blockquote>
+<ul>
+<li>不支持持久连接。一旦服务器对客户端发出响应就立即断开TCP连接</li>
+<li>无请求头跟响应头</li>
+<li>客户端的前后请求是同步的。下一个请求必须等上一个请求从服务端拿到响应后才能发出，有点类似多线程的同步机制。</li>
+</ul>
+<blockquote>
+<p>HTTP 1.1(主流版本)<br>与1.1之前的版本相比，做了以下性能上的提升</p>
+</blockquote>
+<ul>
+<li>增加请求头跟响应头</li>
+<li>支持持久连接。客户端通过请求头中指定Connection为keep-alive告知服务端不要在完成响应后立即释放连接。HTTP是基于TCP的，在HTTP 1.1中一次TCP连接可以处理多次HTTP请求</li>
+<li>客户端不同请求之间是异步的。下一个请求不必等到上一个请求回来后再发出，而可以连续发出请求，有点类似多线程的异步处理。</li>
+</ul>
+<blockquote>
+<p>HTTP 2.0<br>本着向下兼容的原则，1.1版本有的特性2.0都具备，也使用相同的API。但是2.0将只用于https网址。由于2.0的普及还需要比较长的一段时间，这里不展开，更多新特性请参考这篇文章。</p>
+</blockquote>
+<p>我们重点关注一下当前1.1版本所做几点改变。支持持久连接有什么好处呢？HTTP是基于TCP连接的，如果连接被频繁地启动然后断开就会花费很多资源在TCP三次握手以及四次挥手上，效率低下。以请求一个网页为例，我们知道，一个html网页上的图片资源并不是直接嵌入在网页上，而只是提供url，图片仍需要额外发HTTP 请求去下载。一个网页从请求到最终加载到本地往往需要经过过个HTTP请求。在1.1版本之前请求一个网页就需要发生多次”握手-挥手”的过程，每次连接之间相互独立；而1.1及之后的版本最少只需要一次就够。<br>再来就是请求异步，其好处参考多线程异步处理，在此不展开。<br>以上特性可以用下图表示：</p>
+<p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/6.jpg" alt="图3.1 异步请求.jpg"></p>
+<p>我们可以看到：1、N次请求其实只建立了1次TCP连接，2、N次请求连续异步发出。</p>
+<h2 id="四、HTTP、Socket、TCP的区别"><a href="#四、HTTP、Socket、TCP的区别" class="headerlink" title="四、HTTP、Socket、TCP的区别"></a>四、HTTP、Socket、TCP的区别</h2><p>这三个概念经常被谈到，也是比较容易被混掉的概念。在回顾之前我们先看一下这三者在TCP/IP协议族中的位置关系：</p>
+<p><img src="http://7xwhtl.com1.z0.glb.clouddn.com/7.png" alt="图4.1 层次关系.png"></p>
+<p>HTTP是应用层的协议，更靠近用户端；TCP是传输层的协议；而socket是从传输层上抽象出来的一个抽象层，本质是接口。所以本质上三种还是很好区分的。尽管如此，有时候你可能会懵逼，HTTP连接、TCP连接、socket连接有什么区别？好吧，如果上面的图解释的还是不够清楚的话，我们继续往下看。</p>
+<blockquote>
+<p>1、TCP连接与HTTP连接的区别</p>
+</blockquote>
+<p>上文提过，HTTP是基于TCP的，客户端往服务端发送一个HTTP请求时第一步就是要建立与服务端的TCP连接，也就是先三次握手，“你好，你好，你好”。从HTTP 1.1开始支持持久连接，也就是一次TCP连接可以发送多次的HTTP请求。<br>小总结：HTTP基于TCP</p>
+<blockquote>
+<p>2、TCP连接与Socket连接的区别</p>
+</blockquote>
+<p>在图4.1中我们提到，socket层只是在TCP/UDP传输层上做的一个抽象接口层，因此一个socket连接可以基于TCP，也有可能基于UDP。基于TCP协议的socket连接同样需要通过三次握手建立连接，是可靠的；基于UDP协议的socket连接不需要建立连接的过程，不过对方能不能收到都会发送过去，是不可靠的，大多数的即时通讯IM都是后者。<br>小总结：Socket也可以基于TCP</p>
+<blockquote>
+<p>3、HTTP连接与Socket连接的区别</p>
+</blockquote>
+<p>区分这两个概念是比较有意义的，毕竟TCP看不见摸不着，HTTP与Socket是实实在在能用到的。</p>
+<ul>
+<li>HTTP是短连接，Socket(基于TCP协议的)是长连接。尽管HTTP1.1开始支持持久连接，但仍无法保证始终连接。而Socket连接一旦建立TCP三次握手，除非一方主动断开，否则连接状态一直保持。</li>
+<li>HTTP连接服务端无法主动发消息，Socket连接双方请求的发送先后限制。这点就比较重要了，因为它将决定二者分别适合应用在什么场景下。HTTP采用“请求-响应”机制，在客户端还没发送消息给服务端前，服务端无法推送消息给客户端。必须满足客户端发送消息在前，服务端回复在后。Socket连接双方类似peer2peer的关系，一方随时可以向另一方喊话。</li>
+</ul>
+<blockquote>
+<p>4、问题来了：什么时候该用HTTP，什么时候该用socket</p>
+</blockquote>
+<p>这个问题的提出是很自然而然的。当你接到一个与另一方的网络通讯需求，自然会考虑用HTTP还是用Socket。</p>
+<ul>
+<li>用HTTP的情况：双方不需要时刻保持连接在线，比如客户端资源的获取、文件上传等</li>
+<li>用Socket的情况：大部分即时通讯应用(QQ、微信)、聊天室、苹果APNs等</li>
+</ul>
+<p>在iOS中，发HTTP请求一般用原生的<code>NSURLConnection</code>、<code>NSURLSession</code>或者开源的<code>AFNetWorking</code>(推荐)、<code>ASIHttpRequest</code>(已停止更新)。连接Socket连接我用的比较多是robbiehanson大神的<code>CocoaAsyncSocket</code> (<code>XMPPFramework</code>也是出自他手)。</p>
+<blockquote>
+<p>文／编程小翁（简书作者）<br>原文链接：<a href="http://www.jianshu.com/p/42d9cc1dde10" target="_blank" rel="external">http://www.jianshu.com/p/42d9cc1dde10</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/07/13/Mac下使用Hexo和GitHub搭建静态博客/" itemprop="url">
-              
-                <span itemprop="name">Mac下使用Hexo和GitHub搭建静态博客</span>
-              
-            </a>
         
-      </h1>
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/13/Mac下使用Hexo和GitHub搭建静态博客/" itemprop="url">
+                  Mac下使用Hexo和GitHub搭建静态博客
+                </a>
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-13T11:30:31+08:00"
-              content="2016-07-13" >
-          07-13
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-13T11:30:31+08:00" content="2016-07-13">
+              2016-07-13
+            </time>
+          </span>
 
-    </header>
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/13/Mac下使用Hexo和GitHub搭建静态博客/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/13/Mac下使用Hexo和GitHub搭建静态博客/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><blockquote>
+<p>最近看网上有用Hexo和GitHub的搭建博客的教程，自己也学着搭建了一个，过程分享一下</p>
+</blockquote>
+<h1 id="注册GitHub账号"><a href="#注册GitHub账号" class="headerlink" title="注册GitHub账号"></a>注册GitHub账号</h1><p>因为博客是托管于<a href="www.github.com">GitHub</a>上，所以一个GitHub账户是必须的，注册的步骤就不介绍了，注册完以后选择免费服务即可。拥有一个GitHub账号以后，我们要新建一个仓库，点击首页右下角的<strong> + New repository</strong>，就会出现如下界面：<br><img src="http://7xwhtl.com1.z0.glb.clouddn.com/1514030-90605f5f5ec43923.png" alt="QQ20160713-0@2x.png"></p>
+<h1 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h1><p>创建完仓库后，我们在电脑上安装Git，这样可以在本地建立项目并push到远程仓库上。</p>
+<p>推荐使用Homebrew来安装Git。打开终端（Windows用户可以使用Git Bash等），输入以下指令安装Homebrew（Mac需要安装Xcode）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$  ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure>
+<p>这样我们就安装好了Git。如果出现问题，尝试在指令前加入sudo，sudo可以获得root权限，执行带有sudo的指令电脑会要求你输入密码。</p>
+<h1 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h1><p>接下来就是安装Node.js了，我对Node.js了解不多，Hexo是基于Node.js的，所以Node.js的环境是不可或缺的。<br>直接去<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js官网</a>下载安装就可以了。<br>有了Git和Node.js，Hexo就可以安装了，但是先别急，我们还有一些事情要干。</p>
+<h1 id="配置SSH-keys"><a href="#配置SSH-keys" class="headerlink" title="配置SSH keys"></a>配置SSH keys</h1><p>打开GitHub，在头像旁边有个向下的箭头，点击选择选中setting，点击左边的SSH and GPG keys，添加一个SSH keys。SSH keys的好处是让我们以后在本地进行操作并同步到GitHub上时不用输密码，那么如何配置SSH keys<br>打开终端，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cd \~/. ssh</div></pre></td></tr></table></figure>
+<p>这行代码能够帮助你检查电脑上现有的SSH key。<br>如果提示：<strong>No such file or directory</strong>说明没有key文件，输入以下代码生成新的key文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot;</div></pre></td></tr></table></figure>
+<p>这里的邮件地址填自己注册时的邮件地址，注意大小写，双引号不能省略，终端会返回代码让你确定文件名，回车就好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file in which to save the key (/Users/DoubleD/.ssh/id\_rsa): //回车就行</div></pre></td></tr></table></figure>
+<p>接着会让你输入加密串，可以空着：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ Enter passphrase (empty for no passphrase):\&lt;输入加密串\&gt;</div><div class="line">$ Enter same passphrase again:\&lt;再次输入加密串\&gt;</div></pre></td></tr></table></figure>
+<p>看到如下所示的输出，就代表你已经成功的创建了一个SSH key。<br><img src="http://7xwhtl.com1.z0.glb.clouddn.com/1514030-887eec1b1ed9e3c5.png" alt="输出图"><br>找到本机上的id_rsa.pub文件,在终端输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd .ssh</div><div class="line">$ .ssh open</div></pre></td></tr></table></figure>
+<p>打开它（建议使用Sublime Text）复制里面的代码，记得不要多复制空格或换行，添加到下图位置：<br><img src="http://7xwhtl.com1.z0.glb.clouddn.com/1514030-0e3e9a3ac368e9bb.png" alt="QQ20160713-1@2x.png"><br>然后点击Add key就配置好了SSH key。输入下面的指令测试是否配置成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure>
+<p>如果返回的结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">he authenticity of host &apos;github.com (207.97.227.239)&apos; can&apos;t be established.</div><div class="line">RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.</div><div class="line">Are you sure you want to continue connecting (yes/no)?</div></pre></td></tr></table></figure>
+<p>输入yes，就能看到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hi YourID! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</div></pre></td></tr></table></figure>
+<p>这样你的SSH key就配置完成了。完成之后，我们设置好个人信息，用于提交代码说明是谁提交的，怎么联系。可以用以下指令完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;你的名字&quot;</div><div class="line">$ git config --global user.email  &quot;你的邮箱&quot;</div></pre></td></tr></table></figure>
+<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1><p>打开终端，输入以下指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure>
+<p>在电脑上你愿意的一个位置建立一个文件夹，名字任意，然后在该目录下执行以下指令（在终端中输入cd+空格+文件路径就可在该目录下执行指令）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo init</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<p>Hexo就会在该文件夹建立博客所需要的所有文件。本地的Hexo博客已经初步搭建起来，输入以下指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo generate//可以简写为 hexo g</div><div class="line">$ hexo server//可以简写为 hexo s</div></pre></td></tr></table></figure>
+<p>就可以在浏览器中输入<a href="http://localhost:4000" target="_blank" rel="external">localhost:4000</a>查看本地博客了。要注意的是，所有的hexo指令都必须在你所建立的目录下执行。</p>
+<h1 id="部署Hexo到GitHub上"><a href="#部署Hexo到GitHub上" class="headerlink" title="部署Hexo到GitHub上"></a>部署Hexo到GitHub上</h1><p>本地的博客已经搭建好了，如何能让别人从网上访问到你的博客？只要将你的本地博客deploy到GitHub上就好。输入以下指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>然后打开博客目录的_config.yml文件，设置deploy的type为git，repository(repo)<br>为<em><a href="https://github.com/你的id/你的id.github.io.git" target="_blank" rel="external">https://github.com/你的id/你的id.github.io.git</a></em>（<strong>需要在type和repo后面加上一个空格再填写，一定要注意加空格，我就是在这里没加空格导致后面命令一直失败</strong>）。最后在你的Hexo目录中找到source文件夹，在其中新建一个文件CNAME，没有后缀名（建议使用Sublime Text新建），内容为你的域名（即ＸXXXXX．XXXXXX，不要加ＷＷＷ之类的前缀），保存。输入以下指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo deploy//可简写为 hexo d</div></pre></td></tr></table></figure>
+<p>在浏览器中输入你自己的域名就可以访问你自己的博客啦！</p>
+<h1 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h1><p>这里是我使用的一个主题，包括使用方法上面已经介绍的很详细了 <a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">NexT</a></p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>建好的博客是可以绑定其他域名的，我这里并没有的做，有兴趣的朋友可以看我下面的参考文章上面有如何申请域名以及绑定域名。</p>
+<p>最后附上我刚刚才搭好的博客，很简陋上面都没有，让大家见笑了 <a href="https://hey2li.github.io" target="_blank" rel="external">Lee2Go</a></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p>【1】<a href="https://hexo.io/zh-cn/docs/writing.html" target="_blank" rel="external">hexo文档</a> </p>
+<p>【2】<a href="https://jmingzi.github.io/2015/12/04/github-hexo写文章上传图片等常用操作记录/" target="_blank" rel="external">github+hexo写文章上传图片等常用操作记录</a></p>
+<p>【3】<a href="https://hexo.io/themes/" target="_blank" rel="external">hexo主题</a></p>
+<p>【4】<a href="https://xuanwo.org/2015/03/26/hexo-intor/" target="_blank" rel="external">史上最详细的Hexo博客搭建图文教程</a></p>
+<p>【5】<a href="http://www.jianshu.com/p/23760f7970f7" target="_blank" rel="external">使用Hexo搭建自己的博客</a></p>
+<p>【6】<a href="http://www.cnblogs.com/zhcncn/p/4097881.html" target="_blank" rel="external">Hexo搭建Github静态博客</a></p>
+<p>【7】<a href="http://yebujimo.com/2015/03/15/Mac下搭建Hexo博客教程/" target="_blank" rel="external">Mac下搭建Hexo博客教程</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/07/12/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
         
-      </h1>
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/12/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-12T14:47:30+08:00"
-              content="2016-07-12" >
-          07-12
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-12T14:47:30+08:00" content="2016-07-12">
+              2016-07-12
+            </time>
+          </span>
 
-    </header>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/12/hello-world/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/12/hello-world/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
-
     
-
   </section>
 
   
-
 
 
           </div>
@@ -667,12 +1351,6 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
-
 
   
 
