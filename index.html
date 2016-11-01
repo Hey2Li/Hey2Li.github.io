@@ -248,6 +248,209 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/01/iOS使用AVPlayer及MPPlayer播放在线视频/" itemprop="url">
+                  iOS使用AVPlayer及MPPlayer播放在线视频
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-01T16:27:17+08:00" content="2016-11-01">
+              2016-11-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/01/iOS使用AVPlayer及MPPlayer播放在线视频/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/01/iOS使用AVPlayer及MPPlayer播放在线视频/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>最近在仿做一个APP，其中使用到视频流播放，原本是打算使用MPPlayer进行在线播放出来的，但是发现iOS9之后以及不在支持MP了，刚好也没怎么接触过AVPlyer借此机会刚好学习一番。因为AVPlayer所有控件都是需要自定义，如果只是简单的播放视频其实是不如MPPlayer方便的。</p>
+</blockquote>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h3 id="1-简单点的MPPlayer"><a href="#1-简单点的MPPlayer" class="headerlink" title="1. 简单点的MPPlayer"></a>1. 简单点的MPPlayer</h3><ul>
+<li>声明一个<code>MPMoviePlayerController</code> 的属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;</div><div class="line">@property (nonatomic, strong) NSString *moviePath;//播放路径</div></pre></td></tr></table></figure>
+<ul>
+<li>懒加载</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">if (!_moviePlayer) &#123;</div><div class="line">       _moviePlayer = [[MPMoviePlayerController alloc]init];</div><div class="line">       [_moviePlayer.view setFrame:CGRectMake(0, 300, self.view.bounds.size.width, self.view.bounds.size.height/3)];</div><div class="line">       //设置自动播放</div><div class="line">       [_moviePlayer setShouldAutoplay:NO];</div><div class="line">       //设置源类型 因为新特性一般都是播放本地的小视频 所以设置源类型为file</div><div class="line">       _moviePlayer.movieSourceType = MPMovieSourceTypeStreaming;</div><div class="line"></div><div class="line">       [self.view addSubview:_moviePlayer.view];</div><div class="line">   &#125;</div><div class="line">   return _moviePlayer;</div></pre></td></tr></table></figure>
+<p>如果只是播放暂停之类的几乎是不需要自己做什么的，很简单。</p>
+<ul>
+<li>设置播放源<br>我是在<code>set</code>方法中设置的，不过这个都无所谓。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (void)setMoviePath:(NSString *)moviePath&#123;</div><div class="line">    _moviePath = [moviePath copy];</div><div class="line">    self.moviePlayer.view.backgroundColor = [UIColor clearColor];</div><div class="line">    // 设置播放的路径</div><div class="line">    self.moviePlayer.contentURL = [NSURL URLWithString:moviePath];</div><div class="line">    [self.moviePlayer prepareToPlay];</div><div class="line">    [self.moviePlayer play];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>viewDidLoad</code>调用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.moviePath = @&quot;http://baobab.wdjcdn.com/1455782903700jy.mp4&quot;;</div></pre></td></tr></table></figure>
+<ul>
+<li>大功告成</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1514030-deadac433c646cfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MPPlyer播放"></p>
+<h3 id="2-主角AVPlayer"><a href="#2-主角AVPlayer" class="headerlink" title="2.主角AVPlayer"></a>2.主角AVPlayer</h3><ul>
+<li>AVPlayer需要的属性，这是播放器基础</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) AVPlayer *player;</div><div class="line">@property (nonatomic, strong) AVPlayerItem *playerItem;</div><div class="line">@property (nonatomic, strong) AVPlayerLayer *playerLayer;</div></pre></td></tr></table></figure>
+<ul>
+<li>实现AVPlayer播放</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> NSURL *url = [NSURL URLWithString:_playerUrl];</div><div class="line">_item = [[AVPlayerItem alloc] initWithURL:url];</div><div class="line">_player = [AVPlayer playerWithPlayerItem:_item];</div><div class="line">_playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];</div><div class="line">_playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;</div><div class="line">[self.layer addSublayer:_playerLayer];</div><div class="line">[_player play];</div></pre></td></tr></table></figure>
+<p>虽然是可以播放视频了但仅仅是能播放而已，暂停播放快进等功能都没有，下面对他进行完善。</p>
+<ul>
+<li>添加底部工具栏</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) UIView *toolView;//工具栏</div><div class="line">@property (nonatomic, strong) UISlider *slider;//用来现实视频的播放进度</div><div class="line">@property (nonatomic, assign) BOOL isShowToolView;//是否显示工具栏</div><div class="line">@property (nonatomic, strong) UIButton *playOrPause;//播放暂停按钮</div><div class="line"></div><div class="line">@property (nonatomic, strong) NSTimer *showTimer;//显示工具栏时间</div><div class="line">@property (nonatomic, strong) NSTimer *progressTimer;//进度条计时器</div><div class="line">@property (nonatomic, strong) UILabel *timerLabel;//播放时间</div><div class="line">@property (nonatomic, strong) UILabel *allTimeLabel;//总时间</div><div class="line">@property (nonatomic, strong) UIButton *bigPlayBtn;//中间播放按钮</div><div class="line">@property (nonatomic, strong) UIView *coverView;//遮盖版</div></pre></td></tr></table></figure>
+<ul>
+<li>下面就是界面实现了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//工具栏</div><div class="line">       self.toolView = [[UIView alloc]initWithFrame:CGRectMake(0, self.bounds.size.height - kToolViewHieght, self.bounds.size.width, kToolViewHieght)];</div><div class="line">       self.toolView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];</div><div class="line">       [self addSubview:self.toolView];</div><div class="line">       [self bringSubviewToFront:self.toolView];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//播放按钮</div><div class="line">      self.playOrPause = [UIButton buttonWithType:UIButtonTypeCustom];</div><div class="line">      [self.playOrPause setImage:[UIImage imageNamed:@&quot;videoplay&quot;] forState:UIControlStateNormal];</div><div class="line">      [self.playOrPause setImage:[UIImage imageNamed:@&quot;videopause&quot;] forState:UIControlStateSelected];</div><div class="line">      self.playOrPause.contentMode = UIViewContentModeCenter;</div><div class="line">      [self.playOrPause addTarget:self action:@selector(playOrPauseClick:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">      self.playOrPause.frame = CGRectMake(0, 0, 30, kToolViewHieght);</div><div class="line">      [self.toolView addSubview:self.playOrPause];</div></pre></td></tr></table></figure>
+<ul>
+<li>其他控件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">self.timerLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 0, 40, kToolViewHieght)];</div><div class="line">self.timerLabel.font = [UIFont systemFontOfSize:10.0];</div><div class="line">self.timerLabel.textColor = [UIColor whiteColor];</div><div class="line">[self.toolView addSubview:self.timerLabel];</div><div class="line"></div><div class="line">self.allTimeLabel  =[[UILabel alloc]initWithFrame:CGRectMake(70, 0, 40, kToolViewHieght)];</div><div class="line">self.allTimeLabel.font = [UIFont systemFontOfSize:10.0];</div><div class="line">self.allTimeLabel.textColor = [UIColor whiteColor];</div><div class="line">[self.toolView addSubview:self.allTimeLabel];</div><div class="line"></div><div class="line">self.bigPlayBtn = [UIButton buttonWithType:UIButtonTypeCustom];</div><div class="line">[self.bigPlayBtn setImage:[UIImage imageNamed:@&quot;videoplay&quot;] forState:UIControlStateNormal];</div><div class="line">[self.bigPlayBtn addTarget:self action:@selector(playOrPauseBigClick:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">self.bigPlayBtn.frame = self.bounds;</div><div class="line">self.bigPlayBtn.contentMode = UIViewContentModeScaleAspectFill;</div><div class="line">[self addSubview:self.bigPlayBtn];</div><div class="line"></div><div class="line"></div><div class="line">self.coverView.hidden = YES;</div><div class="line">self.toolView.alpha = 0;</div><div class="line">self.isShowToolView = NO;</div><div class="line">self.playOrPause.selected = NO;</div></pre></td></tr></table></figure>
+<ul>
+<li>进度条 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//懒加载进度条</div><div class="line">- (UISlider *)slider&#123;</div><div class="line">    if (!_slider) &#123;</div><div class="line">        _slider.backgroundColor = [UIColor whiteColor];</div><div class="line">        _slider = [[UISlider alloc]initWithFrame:CGRectMake(110, 0, 200, kToolViewHieght)];</div><div class="line">        //设置slider原点已经最大点最小点图片</div><div class="line">        [_slider setThumbImage:[UIImage imageNamed:@&quot;videothumb&quot;] forState:UIControlStateNormal];</div><div class="line">        [_slider addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];</div><div class="line">        [_slider addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];</div><div class="line">        [_slider addTarget:self action:@selector(touchUpInside:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">    &#125;</div><div class="line">    return _slider;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>进度条点击方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">- (void)touchDown:(UISlider *)slider&#123;</div><div class="line">    // 按下去 移除监听器</div><div class="line">    [self removeProgressTimer];</div><div class="line">    [self removeShowTime];</div><div class="line">&#125;</div><div class="line">- (void)valueChange:(UISlider *)slider&#123;</div><div class="line">    NSTimeInterval currentTime = CMTimeGetSeconds(self.player.currentItem.duration) * slider.value;</div><div class="line">    self.timerLabel.text = [self timeToStringWithTimeInterval:currentTime];</div><div class="line">&#125;</div><div class="line">- (void)touchUpInside:(UISlider *)slider&#123;</div><div class="line">    [self addProgressTimer];</div><div class="line">    //计算当前slider拖动对应的播放时间</div><div class="line">    NSTimeInterval currentTime = CMTimeGetSeconds(self.player.currentItem.duration) * slider.value;</div><div class="line">    // seekToTime:播放跳转到当前播放时间</div><div class="line">    [self.player seekToTime:CMTimeMakeWithSeconds(currentTime, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];</div><div class="line">    [self toolViewShow];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>slider定时器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (NSTimer *)progressTimer&#123;</div><div class="line">    if (!_progressTimer) &#123;</div><div class="line">        _progressTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(updateProgressInfo) userInfo:nil repeats:YES];</div><div class="line">        [[NSRunLoop mainRunLoop]addTimer:self.progressTimer forMode:NSRunLoopCommonModes];</div><div class="line">    &#125;</div><div class="line">    return _progressTimer;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>更新slider和time</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (void)updateProgressInfo&#123;</div><div class="line">    NSTimeInterval currentTime = CMTimeGetSeconds(self.player.currentTime);</div><div class="line">    NSTimeInterval durationTime = CMTimeGetSeconds(self.player.currentItem.duration);</div><div class="line">    </div><div class="line">    self.timerLabel.text = [self timeToStringWithTimeInterval:currentTime];</div><div class="line">    self.allTimeLabel.text = [self timeToStringWithTimeInterval:durationTime];</div><div class="line">    self.slider.value = CMTimeGetSeconds(self.player.currentTime)/CMTimeGetSeconds(self.player.currentItem.duration);</div><div class="line">    </div><div class="line">    if (self.slider.value == 1) &#123;</div><div class="line">        [self removeProgressTimer];</div><div class="line">        self.coverView.hidden = NO;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>移除slider定时器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//移除slider定时器</div><div class="line">- (void)removeProgressTimer&#123;</div><div class="line">    [self.progressTimer invalidate];</div><div class="line">    self.progressTimer = nil;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>播放器的手势点击</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//手势点击</div><div class="line">- (void)playTap:(UITapGestureRecognizer *)tap&#123;</div><div class="line">    //未播放状态，点击view会直接播放</div><div class="line">    if (self.player.status == AVPlayerStatusUnknown) &#123;</div><div class="line">        [self playOrPauseClick:self.playOrPause];</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    //记录工具栏的是否隐藏</div><div class="line">    self.isShowToolView = !self.isShowToolView;</div><div class="line">    if (self.isShowToolView) &#123;</div><div class="line">        [UIView animateWithDuration:0.5 animations:^&#123;</div><div class="line">            self.toolView.alpha = 0.8;</div><div class="line">        &#125;];</div><div class="line">        //工具栏的按钮为播放状态是，添加计时器，5秒之后自动隐藏</div><div class="line">        if (self.playOrPause.selected) &#123;</div><div class="line">            [self toolViewShow];</div><div class="line">        &#125;</div><div class="line">    &#125;else&#123;</div><div class="line">        [self removeShowTime];</div><div class="line">        [UIView animateWithDuration:0.5 animations:^&#123;</div><div class="line">            self.toolView.alpha = 0;</div><div class="line">        &#125;];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>播放按钮方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (void)playOrPauseClick:(UIButton *)btn&#123;</div><div class="line">    btn.selected = !btn.selected;</div><div class="line">    if (!btn.selected) &#123;</div><div class="line">        self.toolView.alpha = 0.8;</div><div class="line">        [self removeShowTime];</div><div class="line">        [self.player pause];</div><div class="line">        [self removeProgressTimer];</div><div class="line">    &#125;else&#123;</div><div class="line">        [self toolViewShow];</div><div class="line">        [self.player play];</div><div class="line">        [self addProgressTimer];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>中间播放按钮的方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//中间播放按钮的方法</div><div class="line">- (void)playOrPauseBigClick:(UIButton *)btn&#123;</div><div class="line">    btn.hidden = YES;</div><div class="line">    self.playOrPause.selected = YES;</div><div class="line">    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];</div><div class="line">    [self.player play];</div><div class="line">    [self addProgressTimer];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>工具栏的显示及隐藏</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (void)toolViewShow&#123;</div><div class="line">    self.showTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(toolViewHide) userInfo:nil repeats:NO];</div><div class="line">    [[NSRunLoop mainRunLoop]addTimer:self.showTimer forMode:NSRunLoopCommonModes];</div><div class="line">&#125;</div><div class="line">- (void)toolViewHide&#123;</div><div class="line">    self.isShowToolView = !self.isShowToolView;</div><div class="line">    [UIView animateWithDuration:0.5 animations:^&#123;</div><div class="line">        self.toolView.alpha = 0;</div><div class="line">    &#125;];</div><div class="line">    NSLog(@&quot;工具栏隐藏&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>添加遮罩视图用于播放完成后</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (UIView *)coverView&#123;</div><div class="line">    if (!_coverView) &#123;</div><div class="line">        _coverView = [UIView new];</div><div class="line">        _coverView.center = self.center;</div><div class="line">        _coverView.bounds = CGRectMake(0, 0, 100, 100);</div><div class="line">        _coverView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.9];</div><div class="line">        [self addSubview:_coverView];</div><div class="line">    &#125;</div><div class="line">    return _coverView;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在遮罩视图上添加重播按钮</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">UIButton *ReplayBtn = [UIButton buttonWithType:UIButtonTypeCustom];</div><div class="line">[ReplayBtn setImage:[UIImage imageNamed:@&quot;chongshe&quot;] forState:UIControlStateNormal];</div><div class="line">ReplayBtn.center = self.coverView.center;</div><div class="line">ReplayBtn.frame = CGRectMake(0, 0, 100, 100);</div><div class="line">[ReplayBtn addTarget:self action:@selector(rePlayClick) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">[self.coverView addSubview:ReplayBtn];</div></pre></td></tr></table></figure>
+<ul>
+<li>重播按钮的方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (void)rePlayClick&#123;</div><div class="line">    self.slider.value = 0;</div><div class="line">    [self touchUpInside:self.slider];</div><div class="line">    self.coverView.hidden = YES;</div><div class="line">    [self playOrPauseBigClick:self.bigPlayBtn];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>到这里一个带有播放暂停重播等基本功能的播发器就完成了</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1514030-af99d1f3e31d0432.gif?imageMogr2/auto-orient/strip" alt="完成效果图"></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><ul>
+<li>上面是我用AVPlayer实现播放的一点心得。demo做的很简陋，有诸多的不足，需要完善的地方也有很多，主要是为了给大家提供一个思路抛砖引玉，希望可以帮到大家。</li>
+<li>惯例放上<a href="https://github.com/Hey2Li/AVPlayerDemo" target="_blank" rel="external">项目源码</a>还有我的<a href="www.hiis.me">个人网站</a>，有需要的可以去看一下。</li>
+<li>参考文章<a href="http://www.jianshu.com/p/b3631d22f721" target="_blank" rel="external">iOS-视频播放器的简单封装</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/30/iOS开发实现TouchID指纹解锁/" itemprop="url">
                   iOS开发实现TouchID指纹解锁
                 </a>
@@ -1191,7 +1394,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1208,7 +1411,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
