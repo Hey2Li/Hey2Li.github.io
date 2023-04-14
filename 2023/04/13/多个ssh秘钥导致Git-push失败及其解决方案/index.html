@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
@@ -13,27 +13,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Leelt">
   <meta name="keywords" content="">
   
     <meta name="description" content="前言 自从上次更换Mac，导致Hexo文件丢失后居然已经N年没有写Blog，最近心血来潮打算重新开始拾起来，于是便新建了一个Hexo将以前的替换，重新开始，索性便将遇到的问题当做这个Blog的第一篇吧。 解决方案请直接看最后，中间都是无用废话  起因因为向GitHub推送内容需要ssh秘钥，但是我本地已经有了gitlab的秘钥，我又不想替换于是便Google一下如何配置多个ssh秘钥，命令如下：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多个ssh秘钥导致Git push失败及其解决方案">
 <meta property="og:url" content="http://example.com/2023/04/13/%E5%A4%9A%E4%B8%AAssh%E7%A7%98%E9%92%A5%E5%AF%BC%E8%87%B4Git-push%E5%A4%B1%E8%B4%A5%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="三万英尺">
 <meta property="og:description" content="前言 自从上次更换Mac，导致Hexo文件丢失后居然已经N年没有写Blog，最近心血来潮打算重新开始拾起来，于是便新建了一个Hexo将以前的替换，重新开始，索性便将遇到的问题当做这个Blog的第一篇吧。 解决方案请直接看最后，中间都是无用废话  起因因为向GitHub推送内容需要ssh秘钥，但是我本地已经有了gitlab的秘钥，我又不想替换于是便Google一下如何配置多个ssh秘钥，命令如下：">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/20230413183804.jpg">
 <meta property="article:published_time" content="2023-04-13T09:40:23.000Z">
 <meta property="article:modified_time" content="2023-04-13T11:10:10.678Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Leelt">
 <meta property="article:tag" content="fixs">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/20230413183804.jpg">
   
   
   
-  <title>多个ssh秘钥导致Git push失败及其解决方案 - Hexo</title>
+  <title>多个ssh秘钥导致Git push失败及其解决方案 - 三万英尺</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -97,7 +97,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>little.fun</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -117,7 +117,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                <span>Home</span>
+                <span>首页</span>
               </a>
             </li>
           
@@ -129,7 +129,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                <span>Archives</span>
+                <span>归档</span>
               </a>
             </li>
           
@@ -141,7 +141,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                <span>Categories</span>
+                <span>分类</span>
               </a>
             </li>
           
@@ -153,7 +153,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
+                <span>标签</span>
               </a>
             </li>
           
@@ -165,7 +165,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                <span>About</span>
+                <span>关于</span>
               </a>
             </li>
           
@@ -211,7 +211,7 @@
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2023-04-13 17:40" pubdate>
-          April 13, 2023 pm
+          2023年4月13日 下午
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          2.2k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          19 mins
+          19 分钟
         
       </span>
     
@@ -373,26 +373,26 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
-          <div>John Doe</div>
+          <div>作者</div>
+          <div>Leelt</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
-          <div>April 13, 2023</div>
+          <div>发布于</div>
+          <div>2023年4月13日</div>
         </div>
       
       
       
         <div class="license-meta-item">
-          <div>Licensed under</div>
+          <div>许可协议</div>
           <div>
             
               
               
                 <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-by"></i>
                   </span>
                 </a>
@@ -418,7 +418,7 @@
                     
                       <a href="/2023/04/13/hello-world/" title="Hello World">
                         <span class="hidden-mobile">Hello World</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -439,7 +439,7 @@
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>Table of Contents</span>
+    <span>目录</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -495,7 +495,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -503,7 +503,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -682,7 +682,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>
