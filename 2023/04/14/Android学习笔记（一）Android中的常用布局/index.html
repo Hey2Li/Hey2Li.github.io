@@ -1,0 +1,736 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Leelt">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Android中的常用布局1线性布局 LinearLayout​        线性布局是Android的基本布局，可以水平排列horizontal和垂直排列vertical通过android:orientation来设置方向，系统默认布局为水平方向排列，这跟iOS中的VStack,HStack有些相似。​        除了方向之外，线性布局还有一个权重概念，所谓权重就是指布局的子视图各自拥有多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记">
+<meta property="og:url" content="http://example.com/2023/04/14/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Android%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="little.fun">
+<meta property="og:description" content="Android中的常用布局1线性布局 LinearLayout​        线性布局是Android的基本布局，可以水平排列horizontal和垂直排列vertical通过android:orientation来设置方向，系统默认布局为水平方向排列，这跟iOS中的VStack,HStack有些相似。​        除了方向之外，线性布局还有一个权重概念，所谓权重就是指布局的子视图各自拥有多">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414105040856.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414112641418.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414132425562.png">
+<meta property="article:published_time" content="2023-04-14T02:33:13.000Z">
+<meta property="article:modified_time" content="2023-04-14T05:48:53.223Z">
+<meta property="article:author" content="Leelt">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="android">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414105040856.png">
+  
+  
+  
+  <title>Android学习笔记 - little.fun</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>little.fun</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Android学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-14 10:33" pubdate>
+          2023年4月14日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          90 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Android学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Android中的常用布局"><a href="#Android中的常用布局" class="headerlink" title="Android中的常用布局"></a>Android中的常用布局</h1><h2 id="1线性布局-LinearLayout"><a href="#1线性布局-LinearLayout" class="headerlink" title="1线性布局 LinearLayout"></a>1线性布局 LinearLayout</h2><p>​        线性布局是Android的基本布局，可以水平排列<code>horizontal</code>和垂直排列<code>vertical</code>通过<code>android:orientation</code>来设置方向，系统默认布局为水平方向排列，这跟iOS中的<code>VStack</code>,<code>HStack</code>有些相似。<br>​        除了方向之外，线性布局还有一个权重概念，所谓权重就是指布局的子视图各自拥有多大的比例的宽高。占比多或是占比少通过属性<code>android:layout_weight</code>来设置。。不过视图有宽高两个方向，系统怎知layout_weight表示哪个方向的权重呢？所以这里有个规定，一旦设置了layout_weight属性值，便要求layout_width填0dp或者layout_height填0dp。如果layout_width填0dp，则layout_weight表示水平方向的权重，下级视图会从左往右分割线性布局；如果layout_height填0dp，则layout_weight表示垂直方向的权重，下级视图会从上往下分割线性布局。</p>
+<p>​        按照左右均分的话，线性布局设置水平方向horizontal，且甲乙两视图的layout_width都填0dp，layout_weight都填1，此时横排的XML片段示例如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;0dp&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;横排第一个&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;17sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;0dp&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;横排第二个&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;17sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> <br><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>​        按照上下均分的话，线性布局设置垂直方向vertical，且甲乙两视图的layout_height都填0dp，</p>
+<p>layout_weight都填1，此时竖排的XML片段示例如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">&quot;vertical&quot;</span>&gt;</span> <br>	<span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;0dp&quot;</span> <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;竖排第一个&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;17sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> <br>	<span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;0dp&quot;</span> <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;竖排第二个&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;17sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>具体界面如图</p>
+<p><img src="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414105040856.png" srcset="/img/loading.gif" lazyload alt="image-20230414105040856"></p>
+<h2 id="2-相对布局RelativeLayout"><a href="#2-相对布局RelativeLayout" class="headerlink" title="2 相对布局RelativeLayout"></a>2 相对布局RelativeLayout</h2><p>线性布局的子视图是顺序排列的，相对布局的视图位置是有其他视图决定的，学过iOS肯定不陌生，毕竟iOS大部分的布局都是相对布局。如果不设定下级视图的参照物，默认就在RelativeLayout的左上角。</p>
+<table>
+<thead>
+<tr>
+<th>相对位置的属性取值</th>
+<th>相对位置说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>layout_toLeftOf</td>
+<td>当前视图在指定视图的左边</td>
+</tr>
+<tr>
+<td>layout_toRrightOf</td>
+<td>当前视图在指定视图的右边</td>
+</tr>
+<tr>
+<td>layout_above</td>
+<td>在指定视图的上方</td>
+</tr>
+<tr>
+<td>layout_below</td>
+<td>在指定视图的下方</td>
+</tr>
+<tr>
+<td>layout_alignLeft</td>
+<td>当前视图与指定视图左对齐</td>
+</tr>
+<tr>
+<td>layout_alignRight</td>
+<td>当前视图与指定视图右对齐</td>
+</tr>
+<tr>
+<td>layout_alignTop</td>
+<td>当前视图与指定视图顶对齐</td>
+</tr>
+<tr>
+<td>layout_alignBottom</td>
+<td>当前视图与指定视图底对齐</td>
+</tr>
+<tr>
+<td>layout_centerInParent</td>
+<td>当前视图在上级视图中间</td>
+</tr>
+<tr>
+<td>layout_centerHorizontal</td>
+<td>当前视图在上级视图的水平方向居中</td>
+</tr>
+<tr>
+<td>layout_centerVertical</td>
+<td>当前视图与上级视图垂直方向居中</td>
+</tr>
+<tr>
+<td>layout_alignParentLeft</td>
+<td>当前视图与上级视图左对齐</td>
+</tr>
+<tr>
+<td>layout_alignParentRight</td>
+<td>当前视图与上级视图右对齐</td>
+</tr>
+<tr>
+<td>layout_alignParentTop</td>
+<td>当前视图与上级视图顶对齐</td>
+</tr>
+<tr>
+<td>layout_alignParentBottom</td>
+<td>当前试图与上级视图底部对齐</td>
+</tr>
+</tbody></table>
+<p>需要记住的属性大概就这么多，对比<code>masonry</code>好像确实有点多，不过见文知意也不需要特别去记。</p>
+<p>xml代码如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">RelativeLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;150dp&quot;</span> &gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_center&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_centerInParent</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#ffffff&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我在中间&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_center_horizontal&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_centerHorizontal</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我在水平中间&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> 	<br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_center_vertical&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_centerVertical</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我在垂直中间&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_parent_left&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_alignParentLeft</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我跟上级左边对齐&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_parent_right&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_alignParentRight</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我跟上级右边对齐&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_parent_top&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_alignParentTop</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我跟上级顶部对齐&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span></span><br><span class="hljs-tag"><span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_parent_bottom&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_alignParentBottom</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我跟上级底部对齐&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_left_center&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_toLeftOf</span>=<span class="hljs-string">&quot;@+id/tv_center&quot;</span> <span class="hljs-attr">android:layout_alignTop</span>=<span class="hljs-string">&quot;@+id/tv_center&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我在中间左边&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> 	<br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_right_center&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_toRightOf</span>=<span class="hljs-string">&quot;@+id/tv_center&quot;</span> <span class="hljs-attr">android:layout_alignBottom</span>=<span class="hljs-string">&quot;@+id/tv_center&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我在中间右边&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> 				<br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_above_center&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_above</span>=<span class="hljs-string">&quot;@+id/tv_center&quot;</span> <span class="hljs-attr">android:layout_alignLeft</span>=<span class="hljs-string">&quot;@+id/tv_center&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我在中间上面&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> 				<br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/tv_below_center&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_below</span>=<span class="hljs-string">&quot;@+id/tv_center&quot;</span> <span class="hljs-attr">android:layout_alignRight</span>=<span class="hljs-string">&quot;@+id/tv_center&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#eeeeee&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;我在中间下面&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;11sp&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> /&gt;</span> <br><span class="hljs-tag">&lt;/<span class="hljs-name">RelativeLayout</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414112641418.png" srcset="/img/loading.gif" lazyload alt="image-20230414112641418"></p>
+<h2 id="3-网格布局"><a href="#3-网格布局" class="headerlink" title="3 网格布局"></a>3 网格布局</h2><p>​        虽然线性布局能在水平和垂直方向排列，但是它不支持多行多列的布局方式，所有要实现类似表格那样的多行多列形式，可以采用网格布局GridLayout。</p>
+<p>​        网格布局默认从左往右，从上到下排列，它先从第一行从左往右放置子视图，塞满之后另起一行放置其余的子视图，如此循环往复直至放置完毕。为了判断能够容纳几行几列，网格视图新增以下属性<code>android:columnCount</code>与<code>android:rowCount</code>两个属性，<code>columnCount</code>指定列数，<code>rowCount</code>指定行数。</p>
+<p>​        下面是网格布局的布局代码示例，它规定了一个两行两列的网格布局，且内部容纳四个文本视图。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 根布局为两行两列的网格布局，其中列数由columnCount指定，行数由rowCount指定 --&gt;</span> <br><span class="hljs-tag">&lt;<span class="hljs-name">GridLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:columnCount</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">android:rowCount</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;180dp&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;60dp&quot;</span> <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">&quot;center&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#ffcccc&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;浅红色&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;17sp&quot;</span> /&gt;</span> 				<span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;180dp&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;60dp&quot;</span> <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">&quot;center&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#ffaa00&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;橙色&quot;</span><span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;17sp&quot;</span> /&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;180dp&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;60dp&quot;</span> <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">&quot;center&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#00ff00&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;绿色&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;17sp&quot;</span> /&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;180dp&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;60dp&quot;</span> <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">&quot;center&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#660066&quot;</span> <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;深紫色&quot;</span> <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">&quot;#000000&quot;</span> <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">&quot;17sp&quot;</span> /&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">GridLayout</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414132425562.png" srcset="/img/loading.gif" lazyload alt="image-20230414132425562"></p>
+<h2 id="4-滚动视图ScrollView"><a href="#4-滚动视图ScrollView" class="headerlink" title="4 滚动视图ScrollView"></a>4 滚动视图ScrollView</h2><p>滚动视图顾名思义就是可以滚动的视图，当内容超出手机展示界面时需滑动手机屏幕才能完整展示，但是一般的视图不支持自行滚动，这时就需要借助滚动视图。与线性布局类似，滚动视图也分为水平和垂直两类，其中垂直滚动视图为ScrollView，水平滚动视图为HorizontalScrollView，这与iOS倒是不同，iOS只有一个ScrollView，只是有个属性可以设置水平还是垂直。滚动视图使用不用复杂，主要注意一下3点：</p>
+<ul>
+<li><p>垂直滚动时，layout_width属性设置为match_parent,layout_height设置为wrap_content。</p>
+</li>
+<li><p>水平滚动时，layout_width属性设置为wrap_content,layout_height设置为match_parent.</p>
+</li>
+<li><p>滚动视图节点下必须且只能挂着一个子布局节点，否则会在运行时报错<code>Caused by： java.lang.IllegalStateException：ScrollView can host only one direct child</code>。</p>
+</li>
+</ul>
+<p>下面是垂直滚动视图ScrollView和水平滚动HorizontalScrollView的代码示例：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">&quot;vertical&quot;</span>&gt;</span> <br>  <span class="hljs-comment">&lt;!-- HorizontalScrollView是水平方向的滚动视图，当前高度为200dp --&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">HorizontalScrollView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;200dp&quot;</span>&gt;</span> <br>    <span class="hljs-comment">&lt;!-- 水平方向的线性布局，两个子视图的颜色分别为青色和黄色 --&gt;</span> <br>    <span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span> <br>      <span class="hljs-tag">&lt;<span class="hljs-name">View</span></span><br><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;300dp&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#aaffff&quot;</span> /&gt;</span> 	<br>      <span class="hljs-tag">&lt;<span class="hljs-name">View</span></span><br><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;300dp&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#ffff00&quot;</span> /&gt;</span> <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span> <br>  <span class="hljs-tag">&lt;/<span class="hljs-name">HorizontalScrollView</span>&gt;</span> <br>  <span class="hljs-comment">&lt;!-- ScrollView是垂直方向的滚动视图，当前高度为自适应 --&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">ScrollView</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span>&gt;</span> <br>  <span class="hljs-comment">&lt;!-- 垂直方向的线性布局，两个子视图的颜色分别为绿色和橙色 --&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span> <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">&quot;vertical&quot;</span>&gt;</span> <br>    <span class="hljs-tag">&lt;<span class="hljs-name">View</span></span><br><span class="hljs-tag">          <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;400dp&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#00ff00&quot;</span> /&gt;</span> <br>    <span class="hljs-tag">&lt;<span class="hljs-name">View</span></span><br><span class="hljs-tag">          <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;400dp&quot;</span> <span class="hljs-attr">android:background</span>=<span class="hljs-string">&quot;#ffffaa&quot;</span> /&gt;</span> <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">ScrollView</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>运行测试App，可知ScrollView在纵向滚动，而HorizontalScrollView在横向滚动。</p>
+<p><em><strong>注意</strong></em>：有时ScrollView的实际内容不够充满整个屏幕，但是又想让它充满屏幕，如果把layout_height属性设为match_parent，结果还是不能充满，正确的做法是再增加一行属性<code>android:fillViewport</code>该属性为true表示允许充满视图窗口，代码如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml">android:layout_height=&quot;match_parent&quot; <br>android:fillViewport=&quot;true&quot;<br></code></pre></td></tr></table></figure>
+
+
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/">#学习</a>
+      
+        <a href="/tags/android/">#android</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Android学习笔记</div>
+      <div>http://example.com/2023/04/14/Android学习笔记（一）Android中的常用布局/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Leelt</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/13/%E5%A4%9A%E4%B8%AAssh%E7%A7%98%E9%92%A5%E5%AF%BC%E8%87%B4Git-push%E5%A4%B1%E8%B4%A5%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="多个ssh秘钥导致Git push失败及其解决方案">
+                        <span class="hidden-mobile">多个ssh秘钥导致Git push失败及其解决方案</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
