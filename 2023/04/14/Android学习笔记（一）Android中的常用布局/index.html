@@ -18,8 +18,8 @@
   
     <meta name="description" content="Android中的常用布局1线性布局 LinearLayout​        线性布局是Android的基本布局，可以水平排列horizontal和垂直排列vertical通过android:orientation来设置方向，系统默认布局为水平方向排列，这跟iOS中的VStack,HStack有些相似。​        除了方向之外，线性布局还有一个权重概念，所谓权重就是指布局的子视图各自拥有多">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android学习笔记">
-<meta property="og:url" content="http://example.com/2023/04/14/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Android%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:title" content="Android学习笔记（一）Android中的常用布局">
+<meta property="og:url" content="https://ilittle.fun/2023/04/14/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Android%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E5%B8%83%E5%B1%80/index.html">
 <meta property="og:site_name" content="little.fun">
 <meta property="og:description" content="Android中的常用布局1线性布局 LinearLayout​        线性布局是Android的基本布局，可以水平排列horizontal和垂直排列vertical通过android:orientation来设置方向，系统默认布局为水平方向排列，这跟iOS中的VStack,HStack有些相似。​        除了方向之外，线性布局还有一个权重概念，所谓权重就是指布局的子视图各自拥有多">
 <meta property="og:locale" content="zh_CN">
@@ -27,16 +27,16 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414112641418.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414132425562.png">
 <meta property="article:published_time" content="2023-04-14T02:33:13.000Z">
-<meta property="article:modified_time" content="2023-04-14T05:48:53.223Z">
+<meta property="article:modified_time" content="2023-04-14T08:34:03.390Z">
 <meta property="article:author" content="Leelt">
 <meta property="article:tag" content="学习">
-<meta property="article:tag" content="android">
+<meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230414105040856.png">
   
   
   
-  <title>Android学习笔记 - little.fun</title>
+  <title>Android学习笔记（一）Android中的常用布局 - little.fun</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"ilittle.fun","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Android学习笔记"></span>
+            <span id="subtitle" data-typed-text="Android学习笔记（一）Android中的常用布局"></span>
           
         </div>
 
@@ -274,7 +274,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Android学习笔记</h1>
+            <h1 style="display: none">Android学习笔记（一）Android中的常用布局</h1>
             
             
               <div class="markdown-body">
@@ -403,7 +403,7 @@
       
         <a href="/tags/%E5%AD%A6%E4%B9%A0/">#学习</a>
       
-        <a href="/tags/android/">#android</a>
+        <a href="/tags/Android/">#Android</a>
       
     </div>
   
@@ -415,8 +415,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Android学习笔记</div>
-      <div>http://example.com/2023/04/14/Android学习笔记（一）Android中的常用布局/</div>
+      <div>Android学习笔记（一）Android中的常用布局</div>
+      <div>https://ilittle.fun/2023/04/14/Android学习笔记（一）Android中的常用布局/</div>
     </div>
     <div class="license-meta">
       
@@ -459,6 +459,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/04/14/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Android学习笔记（二） 按钮控件Button">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Android学习笔记（二） 按钮控件Button</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
