@@ -16,25 +16,23 @@
   <meta name="author" content="Leelt">
   <meta name="keywords" content="">
   
-    <meta name="description" content="图像显示 本文将学习关于图像显示的几种控件，包括：专门用于显示图片的图像视图以及若干缩放类型效果，支持显示图片的按钮控件–图像按钮，如何在按钮上同事显示文本和图标等。  图像视图ImageView​        显示文本需要TextView，显示图像需要用ImageView。由于图像通常保存为单独的图片文件，音词需要把图像先放到res&#x2F;drwable目录，然后再去引用该资源。XML文件通过属性a">
+    <meta name="description" content="Activity Activity是Android四大组件之一，功能和用法与iOS中的ViewController相类似  Activity的启动和结束从当前页面跳到新页面，代码如下： 1startActivity(new Inent(源页面.this,目标页面.this));		  从当前页面返回上一个页面，相当于关闭当前页面，代码如下： 1finish();	  Activity的生命周期">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android学习笔记（三）图像显示">
-<meta property="og:url" content="https://ilittle.fun/2023/04/17/%20Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA/index.html">
+<meta property="og:title" content="Android学习笔记（四）Activity">
+<meta property="og:url" content="https://ilittle.fun/2023/04/17/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity/index.html">
 <meta property="og:site_name" content="little.fun">
-<meta property="og:description" content="图像显示 本文将学习关于图像显示的几种控件，包括：专门用于显示图片的图像视图以及若干缩放类型效果，支持显示图片的按钮控件–图像按钮，如何在按钮上同事显示文本和图标等。  图像视图ImageView​        显示文本需要TextView，显示图像需要用ImageView。由于图像通常保存为单独的图片文件，音词需要把图像先放到res&#x2F;drwable目录，然后再去引用该资源。XML文件通过属性a">
+<meta property="og:description" content="Activity Activity是Android四大组件之一，功能和用法与iOS中的ViewController相类似  Activity的启动和结束从当前页面跳到新页面，代码如下： 1startActivity(new Inent(源页面.this,目标页面.this));		  从当前页面返回上一个页面，相当于关闭当前页面，代码如下： 1finish();	  Activity的生命周期">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230417140107745.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230417171722612.png">
-<meta property="article:published_time" content="2023-04-17T02:38:58.000Z">
-<meta property="article:modified_time" content="2023-04-17T09:18:24.621Z">
+<meta property="article:published_time" content="2023-04-17T09:42:18.000Z">
+<meta property="article:modified_time" content="2023-04-17T09:57:06.123Z">
 <meta property="article:author" content="Leelt">
+<meta property="article:tag" content="学习">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230417140107745.png">
   
   
   
-  <title>Android学习笔记（三）图像显示 - little.fun</title>
+  <title>Android学习笔记（四）Activity - little.fun</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -217,7 +215,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Android学习笔记（三）图像显示"></span>
+            <span id="subtitle" data-typed-text="Android学习笔记（四）Activity"></span>
           
         </div>
 
@@ -228,8 +226,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-17 10:38" pubdate>
-          2023年4月17日 上午
+        <time datetime="2023-04-17 17:42" pubdate>
+          2023年4月17日 下午
         </time>
       </span>
     
@@ -240,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          185 字
         
       </span>
     
@@ -251,7 +249,7 @@
         
         
         
-          14 分钟
+          2 分钟
         
       </span>
     
@@ -297,99 +295,21 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Android学习笔记（三）图像显示</h1>
+            <h1 style="display: none">Android学习笔记（四）Activity</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="图像显示"><a href="#图像显示" class="headerlink" title="图像显示"></a>图像显示</h2><blockquote>
-<p>本文将学习关于图像显示的几种控件，包括：专门用于显示图片的图像视图以及若干缩放类型效果，支持显示图片的按钮控件–图像按钮，如何在按钮上同事显示文本和图标等。</p>
+                <h1 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h1><blockquote>
+<p>Activity是Android四大组件之一，功能和用法与iOS中的ViewController相类似</p>
 </blockquote>
-<h3 id="图像视图ImageView"><a href="#图像视图ImageView" class="headerlink" title="图像视图ImageView"></a>图像视图ImageView</h3><p>​        显示文本需要TextView，显示图像需要用ImageView。由于图像通常保存为单独的图片文件，音词需要把图像先放到res/drwable目录，然后再去引用该资源。XML文件通过属性android:src设置图片资源，属性值格式形如”@drawable/不含扩展名的图片名称”。添加src属性的ImageView标签示例如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">ImageView</span></span><br><span class="hljs-tag">           <span class="hljs-attr">android:id</span>=<span class="hljs-string">&quot;@+id/iv_scale&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span> </span><br><span class="hljs-tag">           <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;220dp&quot;</span> </span><br><span class="hljs-tag">           <span class="hljs-attr">android:src</span>=<span class="hljs-string">&quot;@drawable/ic_launcher_background&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="Activity的启动和结束"><a href="#Activity的启动和结束" class="headerlink" title="Activity的启动和结束"></a>Activity的启动和结束</h2><p>从当前页面跳到新页面，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">startActivity(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Inent</span>(源页面.<span class="hljs-built_in">this</span>,目标页面.<span class="hljs-built_in">this</span>));		<br></code></pre></td></tr></table></figure>
 
-<p>若想在Java代码中设置图像视图的图片资源，可以调用ImageVIew控件的setImageResource方法，方法参数格式形如<code>R.drawable.不含扩展名的图片名称</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 从布局文件中获取图像视图</span><br><span class="hljs-type">ImageView</span> <span class="hljs-variable">iv_scale</span> <span class="hljs-operator">=</span> findViewById(R.id.iv_scale);<br>iv_scale.setImageResource(R.drawable.ic_launcher_background);<span class="hljs-comment">//设置图像的图片资源</span><br></code></pre></td></tr></table></figure>
+<p>从当前页面返回上一个页面，相当于关闭当前页面，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">finish();	<br></code></pre></td></tr></table></figure>
 
-<h3 id="图像视图的缩放类型"><a href="#图像视图的缩放类型" class="headerlink" title="图像视图的缩放类型"></a>图像视图的缩放类型</h3><p>ImageView本身默认图片居中显示，若要改变图片的显示方式，可通过scaleType属性设置，属性值说明如下：</p>
-<table>
-<thead>
-<tr>
-<th>XML中的缩放类型</th>
-<th>ScaleType类中的缩放类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>fitXY</td>
-<td>FIT_XY</td>
-<td>拉伸图片使其正好填满视图（图片可能被拉伸变形）</td>
-</tr>
-<tr>
-<td>fitStart</td>
-<td>FIT_START</td>
-<td>保持宽高比例，拉伸图片使其位于视图上方或左侧</td>
-</tr>
-<tr>
-<td>fitCenter</td>
-<td>FIT_CENTER</td>
-<td>保持宽高比例，拉伸图片使其位于视图中间</td>
-</tr>
-<tr>
-<td>fitEnd</td>
-<td>FIT_END</td>
-<td>保持宽高比例，拉伸图片使其位于视图下方或右侧</td>
-</tr>
-<tr>
-<td>center</td>
-<td>CENTER</td>
-<td>保持图片原尺寸，使其位于视图中间</td>
-</tr>
-<tr>
-<td>centerCrop</td>
-<td>CENTER_CROP</td>
-<td>拉伸图片使其充满视图，并位于视图中间</td>
-</tr>
-<tr>
-<td>centerInside</td>
-<td>CENTER_INSIDE</td>
-<td>保持宽高比例，缩小图片使其位于视图中间（只缩小不放大）</td>
-</tr>
-</tbody></table>
-<p>效果如下：</p>
-<p><img src="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230417140107745.png" srcset="/img/loading.gif" lazyload alt="image-20230417140107745"></p>
-<h3 id="图像按钮ImageButton"><a href="#图像按钮ImageButton" class="headerlink" title="图像按钮ImageButton"></a>图像按钮ImageButton</h3><ul>
-<li>ImageButton是显示图片的图像按钮，但它继承自ImageView并非Button</li>
-<li>ImageButton和Button之间的区别有：<ul>
-<li>Button既可展示文本也可显示图片，ImageButton只能显示图片不能显示文本。</li>
-<li>ImageButton上的图像可以比例缩放，Button通过背景设置的图像会拉伸变形。</li>
-<li>Button只能靠背景显示一张图片，而ImageButton可分别在前景和背景显示图片，从而实现两张图片叠加的效果。</li>
-</ul>
-</li>
-</ul>
-<h3 id="ImageButton的使用场合"><a href="#ImageButton的使用场合" class="headerlink" title="ImageButton的使用场合"></a>ImageButton的使用场合</h3><ul>
-<li>某些无法打出来的字符，或者某些文字以特殊字体展示等都可以切图放入ImageButton。</li>
-<li>ImageButton与ImageView的区别：<ul>
-<li>ImageButton有默认的按钮背景，ImageView默认无背景</li>
-<li>ImageButton默认的缩放类型为center，二ImageView默认的缩放类型为fitCenter。</li>
-</ul>
-</li>
-</ul>
-<h3 id="同时展示文本与图像"><a href="#同时展示文本与图像" class="headerlink" title="同时展示文本与图像"></a>同时展示文本与图像</h3><ul>
-<li>同时展示文本与图像的可能途径包括：<ol>
-<li>利用LineLayout对ImageView和TextView组合布局。</li>
-<li>通过按钮控件Button的drawable***属性设置文本周围的图标<ul>
-<li>drawableTop：指定文字上方的图片</li>
-<li>drawableBottom：指定文字下方的图片</li>
-<li>drawableLeft：值定文字左边的图片</li>
-<li>drawableRight：指定文字右边的图片</li>
-<li>drawablePadding ：指定图片与文字的间距</li>
-</ul>
-<img src="https://raw.githubusercontent.com/Hey2Li/blog.img/master/image-20230417171722612.png" srcset="/img/loading.gif" lazyload alt="image-20230417171722612"></li>
-</ol>
-</li>
-</ul>
-
+<h2 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h2>
                 
               </div>
             
@@ -400,6 +320,8 @@
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/">#学习</a>
       
         <a href="/tags/Android/">#Android</a>
       
@@ -413,8 +335,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Android学习笔记（三）图像显示</div>
-      <div>https://ilittle.fun/2023/04/17/ Android学习笔记（三）图像显示/</div>
+      <div>Android学习笔记（四）Activity</div>
+      <div>https://ilittle.fun/2023/04/17/Android学习笔记（四）Activity/</div>
     </div>
     <div class="license-meta">
       
@@ -458,9 +380,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/17/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity/" title="Android学习笔记（四）Activity">
+                      <a href="/2023/04/22/%E5%9B%BD%E5%8C%BA%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8C%BAiCloud/" title="国区如何使用土耳其区iCloud">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Android学习笔记（四）Activity</span>
+                        <span class="hidden-mobile">国区如何使用土耳其区iCloud</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -468,8 +390,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/14/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Android学习笔记（二） 按钮控件Button">
-                        <span class="hidden-mobile">Android学习笔记（二） 按钮控件Button</span>
+                      <a href="/2023/04/17/%20Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA/" title="Android学习笔记（三）图像显示">
+                        <span class="hidden-mobile">Android学习笔记（三）图像显示</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
